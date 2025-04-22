@@ -1,7 +1,4 @@
 {
-	"build": {
-		"env": {
-			"NPM_CONFIG_LEGACY_PEER_DEPS": "true"
-		}
-	}
+	"redirects": [{ "source": "/index", "destination": "/", "permanent": true }],
+	"rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
