@@ -19,16 +19,16 @@
 			backdrop-filter: blur(17px);
 		}
 		&.register-wrap {
-			background-image: url(../../../../public/assets/img/authentication/register-img4.jpeg);
+			background-image: url("/assets/img/authentication/register-img4.jpeg");
 		}
 		&.forgot-pass-wrap {
-			background-image: url(../../../../public/assets/img/authentication/forgot-password-img.jpg);
+			background-image: url("/assets/img/authentication/forgot-password-img.jpg");
 		}
 		&.reset-pass-wrap {
-			background-image: url(../../../../public/assets/img/authentication/reset-password-img.jpg);
+			background-image: url("/assets/img/authentication/reset-password-img.jpg");
 		}
 		&.email-veri-wrap {
-			background-image: url(../../../../public/assets/img/authentication/email-verification-img.jpg);
+			background-image: url("/assets/img/authentication/email-verification-img.jpg");
 		}
 		@include respond-below(custom991) {
 			background-image: none;
@@ -439,7 +439,7 @@
 	justify-content: center;
 	-webkit-justify-content: center;
 	-ms-flex-pack: center;
-	background-image: url(../../../../public/assets/img/authentication/login-bg.png);
+	background-image: url("/assets/img/authentication/login-bg.png");
 	background-position: bottom center;
 	background-repeat: no-repeat;
 	background-size: 100% 500px;
