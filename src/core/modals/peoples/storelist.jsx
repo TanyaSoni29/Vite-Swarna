@@ -25,36 +25,46 @@ const StoreList = () => {
 	const columns = [
 		{
 			title: 'Store Name',
-			dataIndex: 'CustomerName',
-			sorter: (a, b) => a.CustomerName.length - b.CustomerName.length,
-		},
-
-		{
-			title: 'Store',
-			dataIndex: 'Customer',
-			sorter: (a, b) => a.Customer.length - b.Customer.length,
+			dataIndex: 'storeName',
+			sorter: (a, b) => a.storeName.localeCompare(b.storeName),
 		},
 
 		{
 			title: 'Email',
-			dataIndex: 'Email',
-			sorter: (a, b) => a.Email.length - b.Email.length,
+			dataIndex: 'email',
+			sorter: (a, b) => a.email.localeCompare(b.email),
+			render: (text) => <div>{text ? text : '-'}</div>,
 		},
 
 		{
 			title: 'Phone',
-			dataIndex: 'Phone',
-			sorter: (a, b) => a.Phone.length - b.Phone.length,
+			dataIndex: 'phoneNumber1',
+			sorter: (a, b) => a.phoneNumber1.localeCompare(b.phoneNumber1),
+			render: (text) => <div>{text ? text : '-'}</div>,
 		},
 
 		{
-			title: 'Country',
-			dataIndex: 'Country',
-			sorter: (a, b) => a.Country.length - b.Country.length,
+			title: 'Phone 2',
+			dataIndex: 'phoneNumber2',
+			sorter: (a, b) => a.phoneNumber2.localeCompare(b.phoneNumber2),
+			render: (text) => <div>{text ? text : '-'}</div>,
+		},
+    {
+			title: 'Address',
+			dataIndex: 'address',
+			sorter: (a, b) => a.address.localeCompare(b.address),
+			render: (text) => <div>{text ? text : '-'}</div>,
+		},
+
+		{
+			title: 'City',
+			dataIndex: 'city',
+			sorter: (a, b) => a.city.localeCompare(b.city),
+			render: (text) => <div>{text ? text : '-'}</div>,
 		},
 		{
 			title: 'Status',
-			dataIndex: 'Code',
+			dataIndex: 'isActive',
 			render: () => (
 				<span
 					className={`badge  badge-success d-inline-flex align-items-center badge-xs`}
@@ -63,7 +73,7 @@ const StoreList = () => {
 					Active
 				</span>
 			),
-			sorter: (a, b) => a.Code.length - b.Code.length,
+			sorter: (a, b) => a.isActive.localeCompare(b.isActive),
 		},
 		{
 			title: '',
