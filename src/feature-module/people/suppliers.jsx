@@ -134,8 +134,11 @@ const Suppliers = () => {
 							</div>
 						</div>
 						<ul className='table-top-head'>
-							<TooltipIcons />
-							<RefreshIcon />
+							<TooltipIcons
+								columns={columns}
+								dataSource={sellers}
+							/>
+							<RefreshIcon api={refreshSellers} />
 							<CollapesIcon />
 						</ul>
 						<div className='page-btn'>
