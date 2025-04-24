@@ -15,6 +15,22 @@ export const authEndpoints = {
 	EXTERNAL_LOGIN: `${BASE}/api/Authenticate/externallogin`,
 };
 
+export const catalogueImagesEndpoints = {
+	GET_CATALOGUE_IMAGES: `${BASE}/api/CatalogueImages`,
+	CREATE_CATALOGUE_IMAGES: `${BASE}/api/CatalogueImages`,
+	GET_CATALOGUE_IMAGE_BY_ID: (id) => `${BASE}/api/CatalogueImages/${id}`,
+	UPDATE_CATALOGUE_IMAGE: (id) => `${BASE}/api/CatalogueImages/${id}`,
+	DELETE_CATALOGUE_IMAGE: (id) => `${BASE}/api/CatalogueImages/${id}`,
+};
+
+export const cataloguesEndpoints = {
+	GET_CATALOGUES: `${BASE}/api/Catalogues`,
+	CREATE_CATALOGUES: `${BASE}/api/Catalogues`,
+	GET_CATALOGUES_BY_ID: (id) => `${BASE}/api/Catalogues/${id}`,
+	UPDATE_CATALOGUES: (id) => `${BASE}/api/Catalogues/${id}`,
+	DELETE_CATALOGUES: (id) => `${BASE}/api/Catalogues/${id}`,
+};
+
 export const categoriesEndpoints = {
 	GET_CATEGORIES: `${BASE}/api/Categories`,
 	CREATE_CATEGORIES: `${BASE}/api/Categories`,
@@ -29,6 +45,10 @@ export const couponsEndpoints = {
 	GET_COUPONS_BY_ID: (id) => `${BASE}/api/Coupons/${id}`,
 	UPDATE_COUPONS: (id) => `${BASE}/api/Coupons/${id}`,
 	DELETE_COUPONS: (id) => `${BASE}/api/Coupons/${id}`,
+};
+
+export const dashboardEndpoints = {
+	GET_DASHBOARD: `${BASE}/api/Dashboard/dashboard`,
 };
 
 export const adsEndpoints = {
@@ -177,6 +197,14 @@ export const sessionsEndpoints = {
 	GET_SESSIONS_BY_ID: (id) => `${BASE}/api/Sessions/${id}`,
 	UPDATE_SESSIONS: (id) => `${BASE}/api/Sessions/${id}`,
 	DELETE_SESSIONS: (id) => `${BASE}/api/Sessions/${id}`,
+};
+
+export const storesEndpoints = {
+	GET_STORES: `${BASE}/api/Stores`,
+	CREATE_STORES: `${BASE}/api/Stores`,
+	GET_STORES_BY_ID: (id) => `${BASE}/api/Stores/${id}`,
+	UPDATE_STORES: (id) => `${BASE}/api/Stores/${id}`,
+	DELETE_STORES: (id) => `${BASE}/api/Stores/${id}`,
 };
 
 export const usersEndpoints = {
