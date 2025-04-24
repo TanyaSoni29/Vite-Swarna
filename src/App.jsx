@@ -18,6 +18,7 @@ import AllRoutes from './Router/router.jsx';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { BrowserRouter } from 'react-router-dom';
 import { base_path } from './environment.jsx';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
 	return (
@@ -25,6 +26,7 @@ function App() {
 			<Provider store={store}>
 				<BrowserRouter basename={base_path}>
 					<AllRoutes />
+					<Toaster />
 				</BrowserRouter>
 			</Provider>
 		</GoogleOAuthProvider>

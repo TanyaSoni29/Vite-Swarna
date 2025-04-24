@@ -9,10 +9,13 @@ import TooltipIcons from '../../core/common/tooltip-content/tooltipIcons';
 import RefreshIcon from '../../core/common/tooltip-content/refresh';
 import CollapesIcon from '../../core/common/tooltip-content/collapes';
 import CommonFooter from '../../core/common/footer/commonFooter';
-import CommonDeleteModal from '../../core/common/modal/commonDeleteModal';
 import { useDispatch } from 'react-redux';
-import { refreshCategories } from '../../core/redux/slices/categoriesSlice';
+import {
+	refreshCategories,
+	setCategory,
+} from '../../core/redux/slices/categoriesSlice';
 import AddCategoryList from '../../core/modals/inventory/addcategorylist';
+import DeleteCategoryModal from '../../core/common/modal/deleteCategoryModal';
 
 const CategoryList = () => {
 	const dispatch = useDispatch();
@@ -47,7 +50,7 @@ const CategoryList = () => {
 			title: '',
 			dataIndex: 'actions',
 			key: 'actions',
-			render: () => (
+			render: (_, category) => (
 				<div className='action-table-data'>
 					<div className='edit-delete-action'>
 						<Link
@@ -55,6 +58,7 @@ const CategoryList = () => {
 							to='#'
 							data-bs-toggle='modal'
 							data-bs-target='#edit-category'
+							onClick={() => dispatch(setCategory(category))}
 						>
 							<i
 								data-feather='edit'
@@ -66,6 +70,7 @@ const CategoryList = () => {
 							data-bs-target='#delete-modal'
 							className='p-2'
 							to='#'
+							onClick={() => dispatch(setCategory(category))}
 						>
 							<i
 								data-feather='trash-2'
@@ -217,7 +222,7 @@ const CategoryList = () => {
 			{/* /Add Category */}
 
 			<EditCategoryList />
-			<CommonDeleteModal />
+			<DeleteCategoryModal />
 		</div>
 	);
 };
