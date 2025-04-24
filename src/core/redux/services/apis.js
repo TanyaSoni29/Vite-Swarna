@@ -11,6 +11,7 @@ export const authEndpoints = {
 	REGISTER_BY_PHONE: `${BASE}/api/Authenticate/registerbyphone`,
 	VERIFY_PHONE: `${BASE}/api/Authenticate/verifyphone`,
 	RESEND_OTP: `${BASE}/api/Authenticate/resendotp`,
+	LOGIN_BY_PHONE: `${BASE}/api/Authenticate/loginbyphone`,
 	EXTERNAL_LOGIN: `${BASE}/api/Authenticate/externallogin`,
 };
 

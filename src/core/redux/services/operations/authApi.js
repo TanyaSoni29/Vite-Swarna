@@ -19,6 +19,7 @@ const {
 	REGISTER_BY_PHONE,
 	VERIFY_PHONE,
 	RESEND_OTP,
+	LOGIN_BY_PHONE,
 	EXTERNAL_LOGIN,
 } = authEndpoints;
 
@@ -131,6 +132,54 @@ export function externalLogin(data, navigate) {
 		const response = await handlePostReq(EXTERNAL_LOGIN, data);
 
 		console.log('LOGIN API RESPONSE.........', response);
+		if (response.status === 'success') {
+			toast.success('Login Successfully');
+			const user = {
+				token: response?.token || null,
+				expiration: response?.expiration || '',
+				userid: response?.userid || null,
+				fullname: response?.fullname || '',
+				username: data?.username || '',
+				role: response?.role || '',
+				email: response?.email || '',
+				emailConfirmed: response?.emailConfirmed || false,
+				phone: response?.phone || '',
+				phoneConfirmed: response?.phoneConfirmed || false,
+				twoFactorEnabled: response?.twoFactorEnabled || false,
+			};
+
+			dispatch(setToken(response.token));
+			dispatch(setUser(user));
+			dispatch(setIsAuth(true));
+			localStorage.setItem('token', response.token);
+			localStorage.setItem('user', JSON.stringify(user));
+			navigate('/index');
+
+			// sendLogs(
+			// 	{
+			// 		url: LOGIN,
+			// 		reqBody: data,
+			// 		headers: setHeaders(),
+			// 		response: response,
+			// 	},
+			// 	'info'
+			// );
+		} else {
+			toast.error('Failed to Login User');
+			navigate('/signin');
+		}
+
+		dispatch(setLoading(false));
+	};
+}
+
+export function loginByPhone(data, navigate) {
+	return async (dispatch) => {
+		dispatch(setLoading(true));
+
+		const response = await handlePostReq(LOGIN_BY_PHONE, data);
+
+		console.log('LOGIN BY PHONE API RESPONSE.........', response);
 		if (response.status === 'success') {
 			toast.success('Login Successfully');
 			const user = {
