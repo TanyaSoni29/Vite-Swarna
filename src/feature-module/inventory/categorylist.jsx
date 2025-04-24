@@ -30,12 +30,13 @@ const CategoryList = () => {
 		{
 			title: 'Name',
 			dataIndex: 'categoryName',
-			sorter: (a, b) => a.categoryName - b.categoryName,
+			sorter: (a, b) => a.categoryName.localeCompare(b.categoryName),
 		},
 		{
 			title: 'Parent Category',
 			dataIndex: 'parentCategoryName',
-			sorter: (a, b) => a.parentCategoryName - b.parentCategoryName,
+			sorter: (a, b) =>
+				(a.parentCategoryName || '').localeCompare(b.parentCategoryName || ''),
 			render: (text) => <div>{text ? text : '-'}</div>,
 		},
 		// {
