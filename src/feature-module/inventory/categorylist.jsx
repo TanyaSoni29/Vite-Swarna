@@ -103,7 +103,7 @@ const CategoryList = () => {
 								columns={columns}
 								dataSource={categories}
 							/>
-							<RefreshIcon />
+							<RefreshIcon api={refreshCategories} />
 							<CollapesIcon />
 						</ul>
 						<div className='page-btn'>
