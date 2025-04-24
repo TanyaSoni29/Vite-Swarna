@@ -143,6 +143,14 @@ export const SidebarData = [
 				submenu: false,
 				roles: ['Admin', 'User', 'Dealer'],
 			},
+			{
+				label: 'Stores',
+				link: '/store-list',
+				icon: 'home-bolt',
+				showSubRoute: false,
+				submenu: false,
+				roles: ['Admin', 'User', 'Dealer'],
+			},
 			// {
 			// 	label: 'Sub Category',
 			// 	link: '/sub-categories',
@@ -459,21 +467,14 @@ export const SidebarData = [
 			// 	submenu: false,
 			// },
 			{
-				label: 'Suppliers',
+				label: 'Sellers',
 				link: '/suppliers',
 				icon: 'user-dollar',
 				showSubRoute: false,
 				submenu: false,
 				roles: ['Admin', 'User', 'Dealer'],
 			},
-			{
-				label: 'Stores',
-				link: '/store-list',
-				icon: 'home-bolt',
-				showSubRoute: false,
-				submenu: false,
-				roles: ['Admin', 'User', 'Dealer'],
-			},
+			
 			// {
 			// 	label: 'Warehouses',
 			// 	link: '/warehouse',

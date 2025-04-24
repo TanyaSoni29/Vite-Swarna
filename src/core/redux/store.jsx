@@ -7,6 +7,7 @@ import authReducer from './slices/authSlice';
 import adsReducer from './slices/adSlice';
 import categoryReducer from './slices/categoriesSlice';
 import storeReducer from './slices/storesSlice';
+import sellerReducer from './slices/sellerSlice';
 
 const store = configureStore({
 	reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
 		ads: adsReducer,
 		category: categoryReducer,
 		store: storeReducer,
+		seller: sellerReducer,
 		rootReducer: rootReducer,
 		themeSetting: themeSettingSlice,
 	},
