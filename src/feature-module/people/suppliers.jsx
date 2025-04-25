@@ -11,6 +11,7 @@ import RefreshIcon from '../../core/common/tooltip-content/refresh';
 import CollapesIcon from '../../core/common/tooltip-content/collapes';
 import { useDispatch } from 'react-redux';
 import { refreshSellers, setSeller } from '../../core/redux/slices/sellerSlice';
+import DeleteSellerModal from '../../core/common/modal/deleteSeller';
 
 const Suppliers = () => {
 	const dispatch = useDispatch();
@@ -245,6 +246,7 @@ const Suppliers = () => {
 				</div>
 			</div>
 			<SupplierModal />
+			<DeleteSellerModal />
 		</>
 	);
 };
