@@ -4,8 +4,8 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { refreshStores } from '../../redux/slices/storesSlice';
 import { deleteSellers } from '../../redux/services/operations/sellerApi';
+import { refreshSellers } from '../../redux/slices/sellerSlice';
 
 const DeleteSellerModal = () => {
 	const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const DeleteSellerModal = () => {
 		try {
 			const response = await deleteSellers(seller?.sellerID);
 			if (response.status === 'success') {
-				dispatch(refreshStores());
+				dispatch(refreshSellers());
 			} else {
 				toast.error('Failed to delete Seller!');
 			}
