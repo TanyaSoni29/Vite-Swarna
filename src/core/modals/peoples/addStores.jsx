@@ -40,7 +40,7 @@ const AddStores = () => {
 				email: data?.email,
 				phoneNumber1: data?.phoneNumber1,
 				phoneNumber2: data?.phoneNumber2,
-				status: data?.isActive || false,
+				isActive: data?.isActive || false,
 			};
 			const response = await createStores(newData);
 			if (response.status === 'success') {
@@ -58,8 +58,16 @@ const AddStores = () => {
 	useEffect(() => {
 		if (isSubmitSuccessful) {
 			reset({
-				categoryName: '',
-				parentCategoryID: null,
+				storeName: "",
+				ownerName: "",
+				address: "",
+				city: "",
+				postalCode: "",
+				description: "",
+				email: "",
+				phoneNumber1: "",
+				phoneNumber2: "",
+				isActive: false,
 			});
 		}
 	}, [reset, isSubmitSuccessful]);
