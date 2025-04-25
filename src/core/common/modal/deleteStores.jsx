@@ -3,9 +3,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // import { Link } from 'react-router-dom';
-import { refreshCategories } from '../../redux/slices/categoriesSlice';
 import toast from 'react-hot-toast';
 import { deleteStores } from '../../redux/services/operations/storesApi';
+import { refreshStores } from '../../redux/slices/storesSlice';
 
 const DeleteStoresModal = () => {
 	const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const DeleteStoresModal = () => {
 		try {
 			const response = await deleteStores(store?.storeID);
 			if (response.status === 'success') {
-				dispatch(refreshCategories());
+				dispatch(refreshStores());
 			} else {
 				toast.error('Failed to delete Store!');
 			}
@@ -43,7 +43,7 @@ const DeleteStoresModal = () => {
 									Delete Store
 								</h4>
 								<p className='text-gray-6 mb-0 fs-16'>
-									Are you sure you want to delete employee?
+									Are you sure you want to delete {store?.storeName} Store?
 								</p>
 								<div className='modal-footer-btn mt-3 d-flex justify-content-center'>
 									<button
