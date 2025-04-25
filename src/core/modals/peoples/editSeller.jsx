@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import { refreshStores } from '../../redux/slices/storesSlice';
 import { updateStores } from '../../redux/services/operations/storesApi';
+import ImageWithBasePath from '../../img/imagewithbasebath';
 // import Select from 'react-select';
 
 const EditSellers = () => {

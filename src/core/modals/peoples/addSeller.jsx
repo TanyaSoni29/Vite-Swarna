@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import Select from 'react-select';
+// import Select from 'react-select';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { refreshStores } from '../../redux/slices/storesSlice';
