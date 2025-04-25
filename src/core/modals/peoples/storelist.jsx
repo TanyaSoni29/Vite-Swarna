@@ -14,7 +14,7 @@ import EditStores from './editStores';
 import DeleteStoresModal from '../../common/modal/deleteStores';
 import CommonFooter from '../../common/footer/commonFooter';
 import { useDispatch } from 'react-redux';
-import { refreshStores } from '../../redux/slices/storesSlice';
+import { refreshStores, setStore } from '../../redux/slices/storesSlice';
 
 const StoreList = () => {
 	const dispatch = useDispatch();
@@ -49,7 +49,7 @@ const StoreList = () => {
 			sorter: (a, b) => a.phoneNumber2.localeCompare(b.phoneNumber2),
 			render: (text) => <div>{text ? text : '-'}</div>,
 		},
-    {
+		{
 			title: 'Address',
 			dataIndex: 'address',
 			sorter: (a, b) => a.address.localeCompare(b.address),
@@ -78,7 +78,7 @@ const StoreList = () => {
 		{
 			title: '',
 			dataIndex: 'action',
-			render: () => (
+			render: (_, store) => (
 				<div className='action-table-data'>
 					<div className='edit-delete-action'>
 						<div className='input-block add-lists'></div>
@@ -92,6 +92,7 @@ const StoreList = () => {
 							to='#'
 							data-bs-toggle='modal'
 							data-bs-target='#edit-store'
+							onClick={() => dispatch(setStore(store))}
 						>
 							<Edit className='feather-edit' />
 						</Link>
@@ -101,6 +102,7 @@ const StoreList = () => {
 							data-bs-target='#delete-modal'
 							className='p-2 d-flex align-items-center border rounded'
 							to='#'
+							onClick={() => dispatch(setStore(store))}
 						>
 							<i
 								data-feather='trash-2'
