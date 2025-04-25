@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { Edit, Trash2 } from 'react-feather';
 import { useSelector } from 'react-redux';
 import Table from '../../core/pagination/datatable';
-import SupplierModal from '../../core/modals/peoples/supplierModal';
 import TooltipIcons from '../../core/common/tooltip-content/tooltipIcons';
 import RefreshIcon from '../../core/common/tooltip-content/refresh';
 import CollapesIcon from '../../core/common/tooltip-content/collapes';
