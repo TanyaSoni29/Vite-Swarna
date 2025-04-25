@@ -5,10 +5,9 @@ import { useForm } from 'react-hook-form';
 // import Select from 'react-select';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
-import { refreshStores } from '../../redux/slices/storesSlice';
-import { createStores } from '../../redux/services/operations/storesApi';
 // import { useSelector } from 'react-redux';
 import { refreshSellers } from '../../redux/slices/sellerSlice';
+import { createSellers } from '../../redux/services/operations/sellerApi';
 
 const AddSellers = () => {
 	const dispatch = useDispatch();
@@ -30,23 +29,26 @@ const AddSellers = () => {
 		console.log(data);
 		try {
 			const newData = {
-				sellerID: data?.sellerID?.value || null,
-				storeName: data?.storeName,
+				businessName: data?.businessName,
 				ownerName: data?.ownerName,
-				address: data?.address,
-				city: data?.city,
-				postalCode: data?.postalCode,
-				description: data?.description,
+				brandName: data?.brandName,
 				email: data?.email,
+				description: data?.description,
 				phoneNumber1: data?.phoneNumber1,
 				phoneNumber2: data?.phoneNumber2,
+				address: data?.address,
+				city: data?.city,
+				state: data?.state,
+				country: data?.country,
+				postalCode: data?.postalCode,
 				isActive: data?.isActive || false,
+				isPremium: data?.isPremium || false,
 			};
-			const response = await createStores(newData);
+			const response = await createSellers(newData);
 			if (response.status === 'success') {
-				dispatch(refreshStores());
+				dispatch(refreshSellers());
 			} else {
-				toast.error('Failed to create Store!');
+				toast.error('Failed to create Seller!');
 			}
 		} catch (error) {
 			console.error(error);
@@ -58,23 +60,23 @@ const AddSellers = () => {
 	useEffect(() => {
 		if (isSubmitSuccessful) {
 			reset({
-				storeName: '',
+				businessName: '',
 				ownerName: '',
-				address: '',
-				city: '',
-				postalCode: '',
-				description: '',
+				brandName: '',
 				email: '',
+				description: '',
 				phoneNumber1: '',
 				phoneNumber2: '',
+				address: '',
+				city: '',
+				state: '',
+				country: '',
+				postalCode: '',
 				isActive: false,
+				isPremium: false,
 			});
 		}
 	}, [reset, isSubmitSuccessful]);
-
-	useEffect(() => {
-		dispatch(refreshSellers());
-	}, [dispatch]);
 
 	return (
 		<div>
@@ -87,7 +89,7 @@ const AddSellers = () => {
 					<div className='modal-content'>
 						<div className='modal-header'>
 							<div className='page-title'>
-								<h4>Add Supplier</h4>
+								<h4>Add Seller</h4>
 							</div>
 							<button
 								type='button'
@@ -128,18 +130,18 @@ const AddSellers = () => {
 									<div className='col-lg-6'>
 										<div className='mb-3'>
 											<label className='form-label'>
-												First Name <span className='text-danger'>*</span>
+												Business Name <span className='text-danger'>*</span>
 											</label>
 											<input
 												type='text'
 												className='form-control'
-												{...register('sellerName', {
-													required: 'Seller Name is Required!',
+												{...register('businessName', {
+													required: 'Business Name is Required!',
 												})}
 											/>
-											{errors.sellerName && (
+											{errors.businessName && (
 												<span className='text-danger'>
-													{errors.sellerName.message}
+													{errors.businessName.message}
 												</span>
 											)}
 										</div>
@@ -147,15 +149,42 @@ const AddSellers = () => {
 									<div className='col-lg-6'>
 										<div className='mb-3'>
 											<label className='form-label'>
-												Last Name <span className='text-danger'>*</span>
+												Owner Name <span className='text-danger'>*</span>
 											</label>
 											<input
 												type='text'
 												className='form-control'
+												{...register('ownerName', {
+													required: 'Owner Name is Required!',
+												})}
 											/>
+											{errors.ownerName && (
+												<span className='text-danger'>
+													{errors.ownerName.message}
+												</span>
+											)}
 										</div>
 									</div>
-									<div className='col-lg-12'>
+									<div className='col-lg-6'>
+										<div className='mb-3'>
+											<label className='form-label'>
+												Brand Name <span className='text-danger'>*</span>
+											</label>
+											<input
+												type='text'
+												className='form-control'
+												{...register('brandName', {
+													required: 'Brand Name is Required!',
+												})}
+											/>
+											{errors.brandName && (
+												<span className='text-danger'>
+													{errors.brandName.message}
+												</span>
+											)}
+										</div>
+									</div>
+									<div className='col-lg-6'>
 										<div className='mb-3'>
 											<label className='form-label'>
 												Email <span className='text-danger'>*</span>
@@ -163,10 +192,37 @@ const AddSellers = () => {
 											<input
 												type='email'
 												className='form-control'
+												{...register('email', {
+													required: 'Email is Required!',
+												})}
 											/>
+											{errors.email && (
+												<span className='text-danger'>
+													{errors.email.message}
+												</span>
+											)}
 										</div>
 									</div>
 									<div className='col-lg-12'>
+										<div className='mb-3'>
+											<label className='form-label'>
+												Description <span className='text-danger'>*</span>
+											</label>
+											<input
+												type='text'
+												className='form-control'
+												{...register('description', {
+													required: 'Description is Required!',
+												})}
+											/>
+											{errors.description && (
+												<span className='text-danger'>
+													{errors.description.message}
+												</span>
+											)}
+										</div>
+									</div>
+									<div className='col-lg-6'>
 										<div className='mb-3'>
 											<label className='form-label'>
 												Phone <span className='text-danger'>*</span>
@@ -174,7 +230,32 @@ const AddSellers = () => {
 											<input
 												type='text'
 												className='form-control'
+												{...register('phoneNumber1', {
+													required: 'Phone is Required!',
+												})}
 											/>
+											{errors.phoneNumber1 && (
+												<span className='text-danger'>
+													{errors.phoneNumber1.message}
+												</span>
+											)}
+										</div>
+									</div>
+									<div className='col-lg-6'>
+										<div className='mb-3'>
+											<label className='form-label'>
+												Phone 2{/* <span className='text-danger'>*</span> */}
+											</label>
+											<input
+												type='text'
+												className='form-control'
+												{...register('phoneNumber2')}
+											/>
+											{errors.phoneNumber2 && (
+												<span className='text-danger'>
+													{errors.phoneNumber2.message}
+												</span>
+											)}
 										</div>
 									</div>
 									<div className='col-lg-12'>
@@ -185,7 +266,15 @@ const AddSellers = () => {
 											<input
 												type='text'
 												className='form-control'
+												{...register('address', {
+													required: 'Address is Required!',
+												})}
 											/>
+											{errors.address && (
+												<span className='text-danger'>
+													{errors.address.message}
+												</span>
+											)}
 										</div>
 									</div>
 									<div className='col-lg-6 col-sm-10 col-10'>
@@ -196,7 +285,15 @@ const AddSellers = () => {
 											<input
 												type='text'
 												className='form-control'
+												{...register('city', {
+													required: 'City is Required!',
+												})}
 											/>
+											{errors.city && (
+												<span className='text-danger'>
+													{errors.city.message}
+												</span>
+											)}
 										</div>
 									</div>
 									<div className='col-lg-6 col-sm-10 col-10'>
@@ -207,7 +304,15 @@ const AddSellers = () => {
 											<input
 												type='text'
 												className='form-control'
+												{...register('state', {
+													required: 'State is Required!',
+												})}
 											/>
+											{errors.state && (
+												<span className='text-danger'>
+													{errors.state.message}
+												</span>
+											)}
 										</div>
 									</div>
 									<div className='col-lg-6 col-sm-10 col-10'>
@@ -218,7 +323,15 @@ const AddSellers = () => {
 											<input
 												type='text'
 												className='form-control'
+												{...register('country', {
+													required: 'Country is Required!',
+												})}
 											/>
+											{errors.country && (
+												<span className='text-danger'>
+													{errors.country.message}
+												</span>
+											)}
 										</div>
 									</div>
 									<div className='col-lg-6'>
@@ -229,7 +342,15 @@ const AddSellers = () => {
 											<input
 												type='text'
 												className='form-control'
+												{...register('postalCode', {
+													required: 'Postal Code is Required!',
+												})}
 											/>
+											{errors.postalCode && (
+												<span className='text-danger'>
+													{errors.postalCode.message}
+												</span>
+											)}
 										</div>
 									</div>
 									<div className='col-md-12'>
@@ -240,7 +361,24 @@ const AddSellers = () => {
 													type='checkbox'
 													id='users5'
 													className='check'
-													defaultChecked
+													{...register('isActive')}
+												/>
+												<label
+													htmlFor='users5'
+													className='checktoggle mb-0'
+												/>
+											</div>
+										</div>
+									</div>
+									<div className='col-md-12'>
+										<div className='mb-0'>
+											<div className='status-toggle modal-status d-flex justify-content-between align-items-center'>
+												<span className='status-label'>Premium</span>
+												<input
+													type='checkbox'
+													id='users5'
+													className='check'
+													{...register('isPremium')}
 												/>
 												<label
 													htmlFor='users5'
@@ -263,7 +401,7 @@ const AddSellers = () => {
 									type='submit'
 									className='btn btn-primary fs-13 fw-medium p-2 px-3'
 								>
-									Add Supplier
+									Add Seller
 								</button>
 							</div>
 						</form>
