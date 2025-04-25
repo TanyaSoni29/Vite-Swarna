@@ -65,12 +65,14 @@ const StoreList = () => {
 		{
 			title: 'Status',
 			dataIndex: 'isActive',
-			render: () => (
+			render: (_, store) => (
 				<span
-					className={`badge  badge-success d-inline-flex align-items-center badge-xs`}
+					className={`badge  ${
+						store?.isActive ? 'badge-success' : 'badge-danger'
+					}  d-inline-flex align-items-center badge-xs`}
 				>
 					<i className='ti ti-point-filled me-1' />
-					Active
+					{store?.isActive ? 'Active' : 'Inactive'}
 				</span>
 			),
 			sorter: (a, b) => a.isActive.localeCompare(b.isActive),
