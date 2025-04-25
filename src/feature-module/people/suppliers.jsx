@@ -11,7 +11,7 @@ import TooltipIcons from '../../core/common/tooltip-content/tooltipIcons';
 import RefreshIcon from '../../core/common/tooltip-content/refresh';
 import CollapesIcon from '../../core/common/tooltip-content/collapes';
 import { useDispatch } from 'react-redux';
-import { refreshSellers } from '../../core/redux/slices/sellerSlice';
+import { refreshSellers, setSeller } from '../../core/redux/slices/sellerSlice';
 
 const Suppliers = () => {
 	const dispatch = useDispatch();
@@ -19,16 +19,16 @@ const Suppliers = () => {
 
 	const columns = [
 		{
-			title: 'Code',
-			dataIndex: 'code',
-			sorter: (a, b) => a.code.length - b.code.length,
+			title: 'Id',
+			dataIndex: 'sellerID',
+			sorter: (a, b) => a.sellerID.length - b.sellerID.length,
 		},
 		{
-			title: 'Supplier Name',
-			dataIndex: 'supplierName',
-			render: (text, record) => (
+			title: 'Business Name',
+			dataIndex: 'businessName',
+			render: (text) => (
 				<span className='productimgname'>
-					<Link
+					{/* <Link
 						to='#'
 						className='avatar avatar-md me-2'
 					>
@@ -37,42 +37,75 @@ const Suppliers = () => {
 							src={record.image}
 							className='img-fluid rounded-2'
 						/>
-					</Link>
-					<Link to='#'>{text}</Link>
+					</Link> */}
+					<Link to='#'>{text ? text : '-'}</Link>
 				</span>
 			),
-			sorter: (a, b) => a.supplierName.length - b.supplierName.length,
+			sorter: (a, b) => a.businessName.localeCompare(b.businessName),
+		},
+		{
+			title: 'Owner',
+			dataIndex: 'ownerName',
+			sorter: (a, b) => a.ownerName.localeCompare(b.ownerName),
+			render: (text) => <div>{text ? text : '-'}</div>,
 		},
 
 		{
 			title: 'Email',
 			dataIndex: 'email',
 			sorter: (a, b) => a.email.length - b.email.length,
+			render: (text) => <div>{text ? text : '-'}</div>,
 		},
 
 		{
 			title: 'Phone',
-			dataIndex: 'phone',
-			sorter: (a, b) => a.phone.length - b.phone.length,
+			dataIndex: 'phoneNumber1',
+			sorter: (a, b) => a.phoneNumber1.localeCompare(b.phoneNumber1),
+			render: (text) => <div>{text ? text : '-'}</div>,
+		},
+
+		{
+			title: 'Phone 2',
+			dataIndex: 'phoneNumber2',
+			sorter: (a, b) => a.phoneNumber2.localeCompare(b.phoneNumber2),
+			render: (text) => <div>{text ? text : '-'}</div>,
 		},
 
 		{
 			title: 'Country',
 			dataIndex: 'country',
 			sorter: (a, b) => a.country.length - b.country.length,
+			render: (text) => <div>{text ? text : '-'}</div>,
 		},
 		{
 			title: 'Status',
-			dataIndex: 'status',
+			dataIndex: 'isActive',
 			render: (text) => (
 				<>
 					<span
 						className={`badge  d-inline-flex align-items-center badge-xs ${
-							text === 'Active' ? 'badge-success' : 'badge-danger'
+							text ? 'badge-success' : 'badge-danger'
 						}`}
 					>
 						<i className='ti ti-point-filled me-1' />
-						{text}
+						{text ? 'Active' : 'Inactive'}
+					</span>
+				</>
+			),
+			sorter: (a, b) => a.status.length - b.status.length,
+		},
+		{
+			title: 'Premium',
+			dataIndex: 'isPremium',
+			render: (text) => (
+				<>
+					<span
+						className={`badge  d-inline-flex align-items-center badge-xs ${
+							text ? 'badge-success' : 'badge-danger'
+						}`}
+					>
+						<i className='ti ti-point-filled me-1' />
+						{text ? 'True' : 'False'}
 					</span>
 				</>
 			),
@@ -82,23 +115,24 @@ const Suppliers = () => {
 		{
 			title: '',
 			dataIndex: 'action',
-			render: () => (
+			render: (_, seller) => (
 				<div className='action-table-data'>
 					<div className='edit-delete-action'>
 						<div className='input-block add-lists'></div>
 
-						<Link
+						{/* <Link
 							className='me-2 p-2'
 							to='#'
 						>
 							<Eye className='feather-view' />
-						</Link>
+						</Link> */}
 
 						<Link
 							className='me-2 p-2'
 							to='#'
 							data-bs-toggle='modal'
 							data-bs-target='#edit-supplier'
+							onClick={() => dispatch(setSeller(seller))}
 						>
 							<Edit className='feather-edit' />
 						</Link>
@@ -108,6 +142,7 @@ const Suppliers = () => {
 							to='#'
 							data-bs-toggle='modal'
 							data-bs-target='#delete-modal'
+							onClick={() => dispatch(setSeller(seller))}
 						>
 							<Trash2 className='feather-trash-2' />
 						</Link>
