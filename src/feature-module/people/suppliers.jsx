@@ -2,8 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Edit, Eye, Trash2 } from 'react-feather';
-import ImageWithBasePath from '../../core/img/imagewithbasebath';
+import { Edit, Trash2 } from 'react-feather';
 import { useSelector } from 'react-redux';
 import Table from '../../core/pagination/datatable';
 import SupplierModal from '../../core/modals/peoples/supplierModal';
