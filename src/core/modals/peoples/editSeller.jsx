@@ -159,18 +159,18 @@ const EditSellers = () => {
 									<div className='col-lg-6'>
 										<div className='mb-3'>
 											<label className='form-label'>
-												First Name <span className='text-danger'>*</span>
+												Business Name <span className='text-danger'>*</span>
 											</label>
 											<input
 												type='text'
 												className='form-control'
-												{...register('sellerName', {
-													required: 'Seller Name is Required!',
+												{...register('businessName', {
+													required: 'Business Name is Required!',
 												})}
 											/>
-											{errors.sellerName && (
+											{errors.businessName && (
 												<span className='text-danger'>
-													{errors.sellerName.message}
+													{errors.businessName.message}
 												</span>
 											)}
 										</div>
@@ -178,13 +178,39 @@ const EditSellers = () => {
 									<div className='col-lg-6'>
 										<div className='mb-3'>
 											<label className='form-label'>
-												Last Name <span className='text-danger'>*</span>
+												Owner Name <span className='text-danger'>*</span>
 											</label>
 											<input
 												type='text'
 												className='form-control'
-												defaultValue='Computers'
+												{...register('ownerName', {
+													required: 'Owner Name is Required!',
+												})}
 											/>
+											{errors.ownerName && (
+												<span className='text-danger'>
+													{errors.ownerName.message}
+												</span>
+											)}
+										</div>
+									</div>
+									<div className='col-lg-12'>
+										<div className='mb-3'>
+											<label className='form-label'>
+												Brand Name <span className='text-danger'>*</span>
+											</label>
+											<input
+												type='text'
+												className='form-control'
+												{...register('brandName', {
+													required: 'Brand Name is Required!',
+												})}
+											/>
+											{errors.brandName && (
+												<span className='text-danger'>
+													{errors.brandName.message}
+												</span>
+											)}
 										</div>
 									</div>
 									<div className='col-lg-12'>
@@ -195,11 +221,37 @@ const EditSellers = () => {
 											<input
 												type='email'
 												className='form-control'
-												defaultValue='carlevans@example.com'
+												{...register('email', {
+													required: 'Email is Required!',
+												})}
 											/>
+											{errors.email && (
+												<span className='text-danger'>
+													{errors.email.message}
+												</span>
+											)}
 										</div>
 									</div>
 									<div className='col-lg-12'>
+										<div className='mb-3'>
+											<label className='form-label'>
+												Description <span className='text-danger'>*</span>
+											</label>
+											<input
+												type='text'
+												className='form-control'
+												{...register('description', {
+													required: 'Description is Required!',
+												})}
+											/>
+											{errors.description && (
+												<span className='text-danger'>
+													{errors.description.message}
+												</span>
+											)}
+										</div>
+									</div>
+									<div className='col-lg-6'>
 										<div className='mb-3'>
 											<label className='form-label'>
 												Phone <span className='text-danger'>*</span>
@@ -207,8 +259,32 @@ const EditSellers = () => {
 											<input
 												type='text'
 												className='form-control'
-												defaultValue={+15964712634}
+												{...register('phoneNumber1', {
+													required: 'Phone is Required!',
+												})}
 											/>
+											{errors.phoneNumber1 && (
+												<span className='text-danger'>
+													{errors.phoneNumber1.message}
+												</span>
+											)}
+										</div>
+									</div>
+									<div className='col-lg-6'>
+										<div className='mb-3'>
+											<label className='form-label'>
+												Phone 2{/* <span className='text-danger'>*</span> */}
+											</label>
+											<input
+												type='text'
+												className='form-control'
+												{...register('phoneNumber2')}
+											/>
+											{errors.phoneNumber2 && (
+												<span className='text-danger'>
+													{errors.phoneNumber2.message}
+												</span>
+											)}
 										</div>
 									</div>
 									<div className='col-lg-12'>
@@ -219,8 +295,15 @@ const EditSellers = () => {
 											<input
 												type='text'
 												className='form-control'
-												defaultValue='46 Perry Street'
+												{...register('address', {
+													required: 'Address is Required!',
+												})}
 											/>
+											{errors.address && (
+												<span className='text-danger'>
+													{errors.address.message}
+												</span>
+											)}
 										</div>
 									</div>
 									<div className='col-lg-6 col-sm-10 col-10'>
@@ -231,7 +314,15 @@ const EditSellers = () => {
 											<input
 												type='text'
 												className='form-control'
+												{...register('city', {
+													required: 'City is Required!',
+												})}
 											/>
+											{errors.city && (
+												<span className='text-danger'>
+													{errors.city.message}
+												</span>
+											)}
 										</div>
 									</div>
 									<div className='col-lg-6 col-sm-10 col-10'>
@@ -242,7 +333,15 @@ const EditSellers = () => {
 											<input
 												type='text'
 												className='form-control'
+												{...register('state', {
+													required: 'State is Required!',
+												})}
 											/>
+											{errors.state && (
+												<span className='text-danger'>
+													{errors.state.message}
+												</span>
+											)}
 										</div>
 									</div>
 									<div className='col-lg-6 col-sm-10 col-10'>
@@ -253,7 +352,15 @@ const EditSellers = () => {
 											<input
 												type='text'
 												className='form-control'
+												{...register('country', {
+													required: 'Country is Required!',
+												})}
 											/>
+											{errors.country && (
+												<span className='text-danger'>
+													{errors.country.message}
+												</span>
+											)}
 										</div>
 									</div>
 									<div className='col-lg-6'>
@@ -264,8 +371,15 @@ const EditSellers = () => {
 											<input
 												type='text'
 												className='form-control'
-												defaultValue={10176}
+												{...register('postalCode', {
+													required: 'Postal Code is Required!',
+												})}
 											/>
+											{errors.postalCode && (
+												<span className='text-danger'>
+													{errors.postalCode.message}
+												</span>
+											)}
 										</div>
 									</div>
 									<div className='col-md-12'>
@@ -274,12 +388,29 @@ const EditSellers = () => {
 												<span className='status-label'>Status</span>
 												<input
 													type='checkbox'
-													id='users6'
+													id='users5'
 													className='check'
-													defaultChecked
+													{...register('isActive')}
 												/>
 												<label
-													htmlFor='users6'
+													htmlFor='users5'
+													className='checktoggle mb-0'
+												/>
+											</div>
+										</div>
+									</div>
+									<div className='col-md-12'>
+										<div className='mb-0'>
+											<div className='status-toggle modal-status d-flex justify-content-between align-items-center'>
+												<span className='status-label'>Premium</span>
+												<input
+													type='checkbox'
+													id='users5'
+													className='check'
+													{...register('isPremium')}
+												/>
+												<label
+													htmlFor='users5'
 													className='checktoggle mb-0'
 												/>
 											</div>
