@@ -36,6 +36,8 @@ export function refreshProducts() {
 			}
 		} catch (error) {
 			console.error('Error refreshing products:', error);
+		} finally {
+			dispatch(setLoading(false));
 		}
 	};
 }

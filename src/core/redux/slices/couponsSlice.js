@@ -36,6 +36,8 @@ export function refreshCoupons() {
 			}
 		} catch (error) {
 			console.error('Error refreshing coupons:', error);
+		} finally {
+			dispatch(setLoading(false));
 		}
 	};
 }

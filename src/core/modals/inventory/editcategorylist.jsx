@@ -55,7 +55,7 @@ const EditCategoryList = () => {
 			const matchedOption = parentCategoryOptions.find(
 				(opt) => opt.value === category.parentCategoryID
 			);
-			setValue('categoryName', category.categoryName);
+			setValue('categoryName', category?.categoryName);
 			setValue('parentCategoryID', matchedOption || null);
 		}
 	}, [

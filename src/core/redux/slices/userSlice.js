@@ -39,6 +39,8 @@ export function refreshUsers() {
 			}
 		} catch (error) {
 			console.error('Error refreshing users:', error);
+		} finally {
+			dispatch(setLoading(false));
 		}
 	};
 }

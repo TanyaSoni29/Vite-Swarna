@@ -39,6 +39,8 @@ export function refreshCategories() {
 			}
 		} catch (error) {
 			console.error('Error refreshing categories:', error);
+		} finally {
+			dispatch(setLoading(false));
 		}
 	};
 }

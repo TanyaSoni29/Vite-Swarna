@@ -39,6 +39,8 @@ export function refreshSellers() {
 			}
 		} catch (error) {
 			console.error('Error refreshing sellers:', error);
+		} finally {
+			dispatch(setLoading(false));
 		}
 	};
 }

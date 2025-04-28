@@ -39,6 +39,8 @@ export function refreshStores() {
 			}
 		} catch (error) {
 			console.error('Error refreshing stores:', error);
+		} finally {
+			dispatch(setLoading(false));
 		}
 	};
 }

@@ -36,6 +36,8 @@ export function refreshAds() {
 			}
 		} catch (error) {
 			console.error('Error refreshing ads:', error);
+		} finally {
+			dispatch(setLoading(false));
 		}
 	};
 }
