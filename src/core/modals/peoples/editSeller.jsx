@@ -1,19 +1,19 @@
 /** @format */
 
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
-import { refreshStores } from '../../redux/slices/storesSlice';
-import { updateStores } from '../../redux/services/operations/storesApi';
 import ImageWithBasePath from '../../img/imagewithbasebath';
+import { updateSellers } from '../../redux/services/operations/sellerApi';
+import { refreshSellers } from '../../redux/slices/sellerSlice';
 // import Select from 'react-select';
 
 const EditSellers = () => {
 	const dispatch = useDispatch();
-	const { sellers } = useSelector((state) => state.seller);
-	const { store } = useSelector((state) => state.store);
-	console.log('store for edit', store);
+	const { seller } = useSelector((state) => state.seller);
+	// const { store } = useSelector((state) => state.store);
+	console.log('seller for edit', seller);
 	const {
 		register,
 		handleSubmit,
@@ -24,35 +24,38 @@ const EditSellers = () => {
 		formState: { errors, isSubmitSuccessful },
 	} = useForm();
 
-	const sellerOptions = useMemo(() => {
-		return sellers.map((seller) => ({
-			value: seller.sellerID,
-			label: seller.businessName,
-		}));
-	}, [sellers]);
+	// const sellerOptions = useMemo(() => {
+	// 	return sellers.map((seller) => ({
+	// 		value: seller.sellerID,
+	// 		label: seller.businessName,
+	// 	}));
+	// }, [sellers]);
 
 	const onSubmit = async (data) => {
 		console.log(data);
 		try {
 			const newData = {
-				storeID: store?.storeID,
-				sellerID: data?.sellerID?.value || null,
-				storeName: data?.storeName,
+				storeID: seller?.sellerID,
+				businessName: data?.businessName,
 				ownerName: data?.ownerName,
-				address: data?.address,
-				city: data?.city,
-				postalCode: data?.postalCode,
-				description: data?.description,
+				brandName: data?.brandName,
 				email: data?.email,
+				description: data?.description,
 				phoneNumber1: data?.phoneNumber1,
 				phoneNumber2: data?.phoneNumber2,
+				address: data?.address,
+				city: data?.city,
+				state: data?.state,
+				country: data?.country,
+				postalCode: data?.postalCode,
 				isActive: data?.isActive || false,
+				isPremium: data?.isPremium || false,
 			};
-			const response = await updateStores(store?.storeID, newData);
+			const response = await updateSellers(seller?.sellerID, newData);
 			if (response.status === 'success') {
-				dispatch(refreshStores());
+				dispatch(refreshSellers());
 			} else {
-				toast.error('Failed to update Store!');
+				toast.error('Failed to update Seller!');
 			}
 		} catch (error) {
 			console.error(error);
@@ -62,44 +65,61 @@ const EditSellers = () => {
 	};
 
 	useEffect(() => {
-		if (store?.storeID) {
-			const matchedOption = sellerOptions.find(
-				(opt) => opt.value === store.sellerID
-			);
-			setValue('storeName', store.storeName);
-			setValue('ownerName', store.ownerName);
-			setValue('email', store.email);
-			setValue('description', store.description);
-			setValue('address', store.address);
-			setValue('city', store.city);
-			setValue('postalCode', store.postalCode);
-			setValue('phoneNumber1', store.phoneNumber1);
-			setValue('phoneNumber2', store.phoneNumber2);
-			setValue('isActive', store.isActive);
-			setValue('sellerID', matchedOption || null);
-		}
+		// if (store?.storeID) {
+		// 	const matchedOption = sellerOptions.find(
+		// 		(opt) => opt.value === store.sellerID
+		// 	);
+		setValue('businessName', seller.businessName);
+		setValue('ownerName', seller.ownerName);
+		setValue('brandName', seller.brandName);
+		setValue('email', seller.email);
+		setValue('description', seller.description);
+		setValue('phoneNumber1', seller.phoneNumber1);
+		setValue('phoneNumber2', seller.phoneNumber2);
+		setValue('address', seller.address);
+		setValue('city', seller.city);
+		setValue('state', seller.state);
+		setValue('country', seller.country);
+		setValue('postalCode', seller.postalCode);
+		setValue('isActive', seller.isActive);
+		setValue('isPremium', seller.isPremium);
+		// setValue('sellerID', matchedOption || null);
+		// }
 	}, [
-		store?.storeID,
-		store?.storeName,
-		store?.sellerID,
-		store?.ownerName,
-		store?.email,
-		store?.description,
-		store?.address,
-		store?.city,
-		store?.postalCode,
-		store?.phoneNumber1,
-		store?.phoneNumber2,
-		store?.isActive,
-		sellerOptions,
+		seller?.businessName,
+		seller?.ownerName,
+		seller?.brandName,
+		seller?.email,
+		seller?.description,
+		seller?.phoneNumber1,
+		seller?.phoneNumber2,
+		seller?.address,
+		seller?.city,
+		seller?.state,
+		seller?.country,
+		seller?.postalCode,
+		seller?.isActive,
+		seller?.isPremium,
 		setValue,
 	]);
 
 	useEffect(() => {
 		if (isSubmitSuccessful) {
 			reset({
-				categoryName: '',
-				parentCategoryID: null,
+				businessName: '',
+				ownerName: '',
+				brandName: '',
+				email: '',
+				description: '',
+				phoneNumber1: '',
+				phoneNumber2: '',
+				address: '',
+				city: '',
+				state: '',
+				country: '',
+				postalCode: '',
+				isActive: false,
+				isPremium: false,
 			});
 		}
 	}, [reset, isSubmitSuccessful]);
