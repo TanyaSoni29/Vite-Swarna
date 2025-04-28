@@ -10,6 +10,7 @@ import storeReducer from './slices/storesSlice';
 import sellerReducer from './slices/sellerSlice';
 import couponReducer from './slices/couponsSlice';
 import giftCardsReducer from './slices/giftCardSlice';
+import userReducer from './slices/userSlice';
 
 const store = configureStore({
 	reducer: {
@@ -19,6 +20,7 @@ const store = configureStore({
 		store: storeReducer,
 		seller: sellerReducer,
 		coupon: couponReducer,
+		user: userReducer,
 		giftCard: giftCardsReducer,
 		rootReducer: rootReducer,
 		themeSetting: themeSettingSlice,
