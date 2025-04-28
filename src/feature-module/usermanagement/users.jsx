@@ -1,6 +1,6 @@
 /** @format */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ImageWithBasePath from '../../core/img/imagewithbasebath';
@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Table from '../../core/pagination/datatable';
 import AddUsers from '../../core/modals/usermanagement/addusers';
 import EditUser from '../../core/modals/usermanagement/edituser';
+import { refreshUsers } from '../../core/redux/slices/userSlice';
 
 const Users = () => {
 	const dispatch = useDispatch();
@@ -167,6 +168,10 @@ const Users = () => {
 		},
 	];
 
+	useEffect(() => {
+		dispatch(refreshUsers());
+	}, [dispatch]);
+
 	return (
 		<div>
 			<div className='page-wrapper'>
@@ -232,6 +237,7 @@ const Users = () => {
 									<Link
 										data-bs-toggle='tooltip'
 										data-bs-placement='top'
+										onClick={() => dispatch(refreshUsers())}
 									>
 										<RotateCcw />
 									</Link>
