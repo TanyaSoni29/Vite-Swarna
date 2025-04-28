@@ -63,18 +63,18 @@ const EditStores = () => {
 	useEffect(() => {
 		if (store?.storeID) {
 			const matchedOption = sellerOptions.find(
-				(opt) => opt.value === store.sellerID
+				(opt) => opt.value === store?.sellerID
 			);
-			setValue('storeName', store.storeName);
-			setValue('ownerName', store.ownerName);
-			setValue('email', store.email);
-			setValue('description', store.description);
-			setValue('address', store.address);
-			setValue('city', store.city);
-			setValue('postalCode', store.postalCode);
-			setValue('phoneNumber1', store.phoneNumber1);
-			setValue('phoneNumber2', store.phoneNumber2);
-			setValue('isActive', store.isActive);
+			setValue('storeName', store?.storeName);
+			setValue('ownerName', store?.ownerName);
+			setValue('email', store?.email);
+			setValue('description', store?.description);
+			setValue('address', store?.address);
+			setValue('city', store?.city);
+			setValue('postalCode', store?.postalCode);
+			setValue('phoneNumber1', store?.phoneNumber1);
+			setValue('phoneNumber2', store?.phoneNumber2);
+			setValue('isActive', store?.isActive);
 			setValue('sellerID', matchedOption || null);
 		}
 	}, [

@@ -69,20 +69,20 @@ const EditSellers = () => {
 		// 	const matchedOption = sellerOptions.find(
 		// 		(opt) => opt.value === store.sellerID
 		// 	);
-		setValue('businessName', seller.businessName);
-		setValue('ownerName', seller.ownerName);
-		setValue('brandName', seller.brandName);
-		setValue('email', seller.email);
-		setValue('description', seller.description);
-		setValue('phoneNumber1', seller.phoneNumber1);
-		setValue('phoneNumber2', seller.phoneNumber2);
-		setValue('address', seller.address);
-		setValue('city', seller.city);
-		setValue('state', seller.state);
-		setValue('country', seller.country);
-		setValue('postalCode', seller.postalCode);
-		setValue('isActive', seller.isActive);
-		setValue('isPremium', seller.isPremium);
+		setValue('businessName', seller?.businessName);
+		setValue('ownerName', seller?.ownerName);
+		setValue('brandName', seller?.brandName);
+		setValue('email', seller?.email);
+		setValue('description', seller?.description);
+		setValue('phoneNumber1', seller?.phoneNumber1);
+		setValue('phoneNumber2', seller?.phoneNumber2);
+		setValue('address', seller?.address);
+		setValue('city', seller?.city);
+		setValue('state', seller?.state);
+		setValue('country', seller?.country);
+		setValue('postalCode', seller?.postalCode);
+		setValue('isActive', seller?.isActive);
+		setValue('isPremium', seller?.isPremium);
 		// setValue('sellerID', matchedOption || null);
 		// }
 	}, [
