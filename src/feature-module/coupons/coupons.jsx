@@ -11,7 +11,10 @@ import { setToogleHeader } from '../../core/redux/action';
 import AddCoupons from '../../core/modals/coupons/addcoupons';
 import EditCoupons from '../../core/modals/coupons/editcoupons';
 import CommonFooter from '../../core/common/footer/commonFooter';
-import { refreshCoupons } from '../../core/redux/slices/couponsSlice';
+import {
+	refreshCoupons,
+	setCoupon,
+} from '../../core/redux/slices/couponsSlice';
 
 const Coupons = () => {
 	const dispatch = useDispatch();
@@ -75,7 +78,7 @@ const Coupons = () => {
 			title: '',
 			dataIndex: 'actions',
 			key: 'actions',
-			render: () => (
+			render: (_, coupon) => (
 				<div className='action-table-data'>
 					<div className='edit-delete-action'>
 						<Link
@@ -83,6 +86,7 @@ const Coupons = () => {
 							to='#'
 							data-bs-toggle='modal'
 							data-bs-target='#edit-units'
+							onClick={() => dispatch(setCoupon(coupon))}
 						>
 							<i
 								data-feather='edit'
