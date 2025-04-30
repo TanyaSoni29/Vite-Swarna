@@ -192,7 +192,7 @@ const Signin = () => {
 													/>
 												</Link>
 											</div> */}
-											<div className='d-flex justify-content-center align-items-center text-center rounded-md w-100'>
+											<div className='text-center rounded-md w-100'>
 												<GoogleLogin
 													onSuccess={async (credentialResponse) => {
 														try {
