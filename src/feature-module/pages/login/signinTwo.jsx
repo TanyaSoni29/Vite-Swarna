@@ -21,10 +21,10 @@ const SigninTwo = () => {
                 <form >
                   <div className="login-userset">
                     <div className="login-logo logo-normal">
-                      <ImageWithBasePath src="assets/img/logo.png" alt="img" />
+                      <ImageWithBasePath src="assets/img/SwarnaLogo.png" alt="img" />
                     </div>
                     <Link to={route.dashboard} className="login-logo logo-white">
-                      <ImageWithBasePath src="assets/img/logo-white.png" alt="Img" />
+                      <ImageWithBasePath src="assets/img/SwarnaLogo.png" alt="Img" />
                     </Link>
                     <div className="login-userheading">
                       <h3>Sign In</h3>

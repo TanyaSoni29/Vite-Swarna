@@ -54,7 +54,7 @@ const Register = () => {
 		console.log('Form Data:', data);
 		try {
 			const newData = {
-				username: data.username || '',
+				username: data.email || '',
 				password: data.password,
 				email: data.email,
 				userRole: getValues('userRole')?.value || 3,

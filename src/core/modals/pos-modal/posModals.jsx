@@ -139,7 +139,7 @@ const PosModals = () => {
           <div className="icon-head text-center">
             <Link to="#">
               <ImageWithBasePath
-                src="assets/img/logo.png"
+                src="assets/img/SwarnaLogo.png"
                 width={100}
                 height={30}
                 alt="Receipt Logo"

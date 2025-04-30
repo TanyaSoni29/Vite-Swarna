@@ -75,7 +75,7 @@ const Sidebar = () => {
 							className='logo logo-normal'
 						>
 							<ImageWithBasePath
-								src='assets/img/logo.svg'
+								src='assets/img/SwarnaLogo.png'
 								alt='Img'
 							/>
 						</Link>
@@ -84,7 +84,7 @@ const Sidebar = () => {
 							className='logo logo-white'
 						>
 							<ImageWithBasePath
-								src='assets/img/logo-white.svg'
+								src='assets/img/SwarnaLogo.png'
 								alt='Img'
 							/>
 						</Link>
@@ -93,7 +93,7 @@ const Sidebar = () => {
 							className='logo-small'
 						>
 							<ImageWithBasePath
-								src='assets/img/logo-small.png'
+								src='assets/img/SwarnaLogo.png'
 								alt='Img'
 							/>
 						</Link>

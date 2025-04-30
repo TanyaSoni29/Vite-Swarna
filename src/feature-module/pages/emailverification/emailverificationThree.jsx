@@ -28,9 +28,9 @@ const EmailverificationThree = () => {
               <div className="col-lg-5 mx-auto">
                 <div className="login-content user-login">
                   <div className="login-logo">
-                    <ImageWithBasePath src="assets/img/logo.png" alt="img" />
+                    <ImageWithBasePath src="assets/img/SwarnaLogo.png" alt="img" />
                     <Link to={route.dashboard} className="login-logo logo-white">
-                      <ImageWithBasePath src="assets/img/logo-white.png" alt="Img" />
+                      <ImageWithBasePath src="assets/img/SwarnaLogo.png" alt="Img" />
                     </Link>
                   </div>
                   <form className="digit-group">

@@ -27,10 +27,10 @@ const Twostepverification = () => {
               <form className="digit-group">
                 <div className="login-userset">
                   <div className="login-logo logo-normal">
-                    <ImageWithBasePath src="assets/img/logo.png" alt="img" />
+                    <ImageWithBasePath src="assets/img/SwarnaLogo.png" alt="img" />
                   </div>
                   <Link to={route.dashboard} className="login-logo logo-white">
-                    <ImageWithBasePath src="assets/img/logo-white.png" alt="Img" />
+                    <ImageWithBasePath src="assets/img/SwarnaLogo.png" alt="Img" />
                   </Link>
                   <div>
                     <div className="login-userheading">

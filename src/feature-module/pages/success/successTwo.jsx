@@ -19,11 +19,11 @@ const SuccessTwo = () => {
                                     <div className="login-userset">
                                         <div className="login-userset">
                                             <div className="login-logo logo-normal">
-                                                <ImageWithBasePath src="assets/img/logo.png" alt="img" />
+                                                <ImageWithBasePath src="assets/img/SwarnaLogo.png" alt="img" />
                                             </div>
                                         </div>
                                         <Link to="index.html" className="login-logo logo-white">
-                                            <ImageWithBasePath src="assets/img/logo-white.png" alt="Img" />
+                                            <ImageWithBasePath src="assets/img/SwarnaLogo.png" alt="Img" />
                                         </Link>
                                         <div className="login-userheading text-center">
                                             <ImageWithBasePath src="assets/img/icons/check-icon.svg" alt="Icon" />

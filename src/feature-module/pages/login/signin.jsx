@@ -84,7 +84,7 @@ const Signin = () => {
 
 									<div className='mb-3'>
 										<label className='form-label'>
-											Username <span className='text-danger'> *</span>
+											Email <span className='text-danger'> *</span>
 										</label>
 										<div className='input-group'>
 											<input
@@ -92,7 +92,7 @@ const Signin = () => {
 												defaultValue=''
 												className='form-control border-end-0'
 												{...register('username', {
-													required: 'User name is required',
+													required: 'Email is required',
 												})}
 											/>
 											{errors.username && (
