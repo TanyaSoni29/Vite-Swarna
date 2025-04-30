@@ -278,19 +278,19 @@ const Register = () => {
 										<h4>OR</h4>
 									</div>
 									<div className='mt-2'>
-										<div className='d-flex align-items-center justify-content-center flex-wrap'>
+										<div className='d-flex align-items-center justify-content-center flex-wrap w-100'>
 											{/* <div className="text-center me-2 flex-fill">
-                        <Link
-                          to="#"
-                          className="br-10 p-2 btn btn-info d-flex align-items-center justify-content-center"
-                        >
-                          <ImageWithBasePath
-                            className="img-fluid m-1"
-                            src="assets/img/icons/facebook-logo.svg"
-                            alt="Facebook"
-                          />
-                        </Link>
-                      </div> */}
+                                                 <Link
+                                                  to="#"
+                                                  className="br-10 p-2 btn btn-info d-flex align-items-center justify-content-center"
+                                            >
+                                             <ImageWithBasePath
+                                               className="img-fluid m-1"
+                                               src="assets/img/icons/facebook-logo.svg"
+                                               alt="Facebook"
+                                             />
+                                           </Link>
+                                           </div> */}
 											<div className='d-flex justify-content-center align-items-center text-center me-2 w-100'>
 												{/* <Link
 													to='#'
