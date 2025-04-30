@@ -98,6 +98,7 @@ const Coupons = () => {
 							data-bs-target='#delete-modal'
 							className='p-2'
 							to='#'
+							onClick={() => dispatch(setCoupon(coupon))}
 						>
 							<i
 								data-feather='trash-2'
