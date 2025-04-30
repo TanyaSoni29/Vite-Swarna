@@ -11,25 +11,25 @@ import {
 	registerUser,
 } from '../../../core/redux/services/operations/authApi';
 import { useForm } from 'react-hook-form';
-import Select from 'react-select';
+// import Select from 'react-select';
 import toast from 'react-hot-toast';
 
 const Register = () => {
-	const status = [
-		{ value: 0, label: 'Choose' },
-		{ value: 1, label: 'Admin' },
-		{ value: 2, label: 'User' },
-		{ value: 3, label: 'Dealer' },
-	];
+	// const status = [
+	// 	{ value: 0, label: 'Choose' },
+	// 	{ value: 1, label: 'Admin' },
+	// 	{ value: 2, label: 'User' },
+	// 	{ value: 3, label: 'Dealer' },
+	// ];
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const {
 		register,
 		handleSubmit,
 		reset,
-		setValue,
+		// setValue,
 		getValues,
-		trigger,
+		// trigger,
 		formState: { errors, isSubmitSuccessful },
 	} = useForm();
 	const [passwordVisibility, setPasswordVisibility] = useState({
@@ -54,10 +54,10 @@ const Register = () => {
 		console.log('Form Data:', data);
 		try {
 			const newData = {
-				username: data.username,
+				username: data.username || '',
 				password: data.password,
 				email: data.email,
-				userRole: getValues('userRole').value,
+				userRole: getValues('userRole')?.value || 3,
 			};
 			dispatch(registerUser(newData, navigate));
 		} catch (error) {
@@ -66,11 +66,11 @@ const Register = () => {
 			reset();
 		}
 	};
-	useEffect(() => {
-		register('userRole', {
-			required: 'User Role is required',
-		});
-	}, [register]);
+	// useEffect(() => {
+	// 	register('userRole', {
+	// 		required: 'User Role is required',
+	// 	});
+	// }, [register]);
 
 	useEffect(() => {
 		if (isSubmitSuccessful) {
@@ -93,7 +93,7 @@ const Register = () => {
 								<div className='login-userset'>
 									<div className='login-logo logo-normal'>
 										<ImageWithBasePath
-											src='assets/img/logo.png'
+											src='assets/img/SwarnaLogo.png'
 											alt='img'
 										/>
 									</div>
@@ -102,7 +102,7 @@ const Register = () => {
 										className='login-logo logo-white'
 									>
 										<ImageWithBasePath
-											src='assets/img/logo-white.png'
+											src='assets/img/SwarnaLogo.png'
 											alt='Img'
 										/>
 									</Link>
@@ -111,7 +111,7 @@ const Register = () => {
 										<h4>Create New Swarna Account</h4>
 									</div>
 
-									<div className='mb-3'>
+									{/* <div className='mb-3'>
 										<label className='form-label'>
 											Username <span className='text-danger'> *</span>
 										</label>
@@ -133,7 +133,7 @@ const Register = () => {
 												<i className='ti ti-user' />
 											</span>
 										</div>
-									</div>
+									</div> */}
 									<div className='mb-3'>
 										<label className='form-label'>
 											Email <span className='text-danger'> *</span>
@@ -215,7 +215,7 @@ const Register = () => {
 											></span>
 										</div>
 									</div>
-									<div className='mb-3'>
+									{/* <div className='mb-3'>
 										<label className='form-label'>
 											Role <span className='text-danger'> *</span>
 										</label>
@@ -233,7 +233,7 @@ const Register = () => {
 												{errors.userRole.message}
 											</span>
 										)}
-									</div>
+									</div> */}
 									<div className='form-login authentication-check'>
 										<div className='row'>
 											<div className='col-sm-8'>

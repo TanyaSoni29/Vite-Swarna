@@ -62,7 +62,7 @@ const Signin = () => {
 								<div className='login-userset'>
 									<div className='login-logo logo-normal'>
 										<ImageWithBasePath
-											src='assets/img/logo.png'
+											src='assets/img/SwarnaLogo.png'
 											alt='img'
 										/>
 									</div>
@@ -71,7 +71,7 @@ const Signin = () => {
 										className='login-logo logo-white'
 									>
 										<ImageWithBasePath
-											src='assets/img/logo-white.png'
+											src='assets/img/SwarnaLogo.png'
 											alt='Img'
 										/>
 									</Link>
