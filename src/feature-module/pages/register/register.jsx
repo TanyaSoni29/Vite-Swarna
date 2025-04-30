@@ -291,7 +291,7 @@ const Register = () => {
                           />
                         </Link>
                       </div> */}
-											<div className='d-flex justify-content-center align-items-center text-center me-2 flex-fill'>
+											<div className='d-flex justify-content-center align-items-center text-center me-2 w-100'>
 												{/* <Link
 													to='#'
 													className='btn btn-white br-10 p-2  border d-flex align-items-center justify-content-center'
