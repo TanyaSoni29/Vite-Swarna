@@ -22,57 +22,82 @@ const Coupons = () => {
 	const { coupons } = useSelector((state) => state.coupon);
 	const dataSource = coupons;
 
+	console.log('dataSource', dataSource);
+
 	const columns = [
 		{
-			title: 'Name',
-			dataIndex: 'Name',
-			sorter: (a, b) => a.Name.length - b.Name.length,
+			title: 'Coupon Code',
+			dataIndex: 'couponCode',
+			sorter: (a, b) => a.couponCode.toLocaleCompare(b.couponCode),
 		},
-		{
-			title: 'Code',
-			dataIndex: 'Code',
-			render: (text) => <span className='badge purple-badge'>{text}</span>,
-			sorter: (a, b) => a.Code.length - b.Code.length,
-		},
-		{
-			title: 'Description',
-			dataIndex: 'Description',
-			sorter: (a, b) => a.Description.length - b.Description.length,
-		},
+		// {
+		// 	title: 'Code',
+		// 	dataIndex: 'Code',
+		// 	render: (text) => <span className='badge purple-badge'>{text}</span>,
+		// 	sorter: (a, b) => a.Code.length - b.Code.length,
+		// },
+		// {
+		// 	title: 'Description',
+		// 	dataIndex: 'Description',
+		// 	sorter: (a, b) => a.Description.length - b.Description.length,
+		// },
 		{
 			title: 'Type',
-			dataIndex: 'Type',
-			sorter: (a, b) => a.Type.length - b.Type.length,
+			dataIndex: 'discountType',
+			sorter: (a, b) => a.discountType.toLocaleCompare(b.discountType),
 		},
 		{
 			title: 'Discount',
-			dataIndex: 'Discount',
-			sorter: (a, b) => a.Discount.length - b.Discount.length,
+			dataIndex: 'discountValue',
+			sorter: (a, b) => a.discountValue.length - b.discountValue.length,
 		},
 		{
 			title: 'Limit',
-			dataIndex: 'Limit',
-			sorter: (a, b) => a.Limit.length - b.Limit.length,
+			dataIndex: 'usageLimit',
+			sorter: (a, b) => a.usageLimit.length - b.usageLimit.length,
+		},
+		{
+			title: 'Start',
+			dataIndex: 'startDate',
+			render: (text) => (
+				<div>
+					{text
+						? new Date(text).toLocaleDateString('en-GB') +
+						  ' ' +
+						  text?.split('T')[1]?.slice(0, 5)
+						: '-'}
+				</div>
+			),
+			sorter: (a, b) => new Date(a.startDate) - new Date(b.startDate),
 		},
 		{
 			title: 'Valid',
-			dataIndex: 'Valid',
-			sorter: (a, b) => a.Valid.length - b.Valid.length,
+			dataIndex: 'endDate',
+			render: (text) => (
+				<div>
+					{text
+						? new Date(text).toLocaleDateString('en-GB') +
+						  ' ' +
+						  text?.split('T')[1]?.slice(0, 5)
+						: '-'}
+				</div>
+			),
+			sorter: (a, b) => new Date(a.endDate) - new Date(b.endDate),
 		},
 
 		{
 			title: 'Status',
-			dataIndex: 'Status',
+			dataIndex: 'isActive',
 			render: (text) => (
 				<span
 					className={`badge table-badge ${
-						text === 'Active' ? 'bg-success' : 'bg-danger'
+						text ? 'bg-success' : 'bg-danger'
 					} fw-medium fs-10`}
 				>
-					{text}
+					{text ? 'Active' : 'Inactive'}
 				</span>
 			),
-			sorter: (a, b) => a.Status.length - b.Status.length,
+			sorter: (a, b) => a.isActive.length - b.isActive.length,
 		},
 		{
 			title: '',
@@ -198,6 +223,7 @@ const Coupons = () => {
 									<Link
 										data-bs-toggle='tooltip'
 										data-bs-placement='top'
+										onClick={() => dispatch(refreshCoupons())}
 									>
 										<RotateCcw />
 									</Link>

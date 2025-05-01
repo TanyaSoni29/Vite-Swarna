@@ -32,7 +32,10 @@ export function refreshCoupons() {
 			const response = await getAllCoupons();
 			console.log('refresh all coupons response ---', response);
 			if (response.status === 'success') {
-				dispatch(setCoupons(response.data));
+				const array = Object.keys(response)
+					.filter((key) => key !== 'status')
+					.map((key) => response[key]);
+				dispatch(setCoupons(array));
 			}
 		} catch (error) {
 			console.error('Error refreshing coupons:', error);
