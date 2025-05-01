@@ -425,12 +425,12 @@ const EditSellers = () => {
 												<span className='status-label'>Premium</span>
 												<input
 													type='checkbox'
-													id='users5'
+													id='users6'
 													className='check'
 													{...register('isPremium')}
 												/>
 												<label
-													htmlFor='users5'
+													htmlFor='users6'
 													className='checktoggle mb-0'
 												/>
 											</div>

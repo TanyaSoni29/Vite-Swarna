@@ -10,6 +10,7 @@ import { all_routes } from '../../Router/all_routes';
 import PredefinedDateRanges from '../../core/common/range-picker/datePicker';
 import { resetAllMode, setDataLayout, setDataTheme, setDataWidth, setRtl } from "../../core/redux/themeSettingSlice";
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 // Register the necessary components for Chart.js
 ChartJS.register(
     CategoryScale,
@@ -28,6 +29,7 @@ const LayoutDemo = () => {
   const route = all_routes;
   const Location = useLocation();
   const dispatch = useDispatch();
+  const {user} = useSelector((state) => state.auth);
      const salesDayChart = {
          chart: {
              height: 245,
@@ -819,7 +821,7 @@ const LayoutDemo = () => {
             <div className="content">
                 <div className="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-2">
                     <div className="mb-3">
-                        <h1 className="mb-1">Welcome, Admin</h1>
+                        <h1 className="mb-1">Welcome, {user?.role}</h1>
                         <p className="fw-medium">
                             You have <span className="text-primary fw-bold">200+</span> Orders,
                             Today
