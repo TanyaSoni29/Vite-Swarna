@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import ImageWithBasePath from '../../core/img/imagewithbasebath';
+// import ImageWithBasePath from '../../core/img/imagewithbasebath';
 import { ChevronUp, RotateCcw } from 'feather-icons-react/build/IconComponents';
 import { setToogleHeader } from '../../core/redux/action';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,28 +12,14 @@ import AddUsers from '../../core/modals/usermanagement/addusers';
 import EditUser from '../../core/modals/usermanagement/edituser';
 import { refreshUsers, setUser } from '../../core/redux/slices/userSlice';
 import DeleteUserModal from '../../core/common/modal/deleteUser';
+import TooltipIcons from '../../core/common/tooltip-content/tooltipIcons';
+
 
 const Users = () => {
 	const dispatch = useDispatch();
 	const data = useSelector((state) => state.rootReducer.toggle_header);
 	const { users } = useSelector((state) => state.user);
 
-	const renderTooltip = (props) => (
-		<Tooltip
-			id='pdf-tooltip'
-			{...props}
-		>
-			Pdf
-		</Tooltip>
-	);
-	const renderExcelTooltip = (props) => (
-		<Tooltip
-			id='excel-tooltip'
-			{...props}
-		>
-			Excel
-		</Tooltip>
-	);
 	const renderPrinterTooltip = (props) => (
 		<Tooltip
 			id='printer-tooltip'
@@ -189,7 +175,11 @@ const Users = () => {
 							</div>
 						</div>
 						<ul className='table-top-head'>
-							<li>
+							<TooltipIcons
+								columns={columns}
+								dataSource={users}
+							/>
+							{/* <li>
 								<OverlayTrigger
 									placement='top'
 									overlay={renderTooltip}
@@ -217,7 +207,7 @@ const Users = () => {
 										/>
 									</Link>
 								</OverlayTrigger>
-							</li>
+							</li> */}
 							<li>
 								<OverlayTrigger
 									placement='top'
