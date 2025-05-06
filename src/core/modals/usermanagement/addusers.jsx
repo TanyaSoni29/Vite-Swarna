@@ -104,6 +104,7 @@ const AddUsers = () => {
 				profilePicture: '',
 				socialMediaLinks: '',
 			});
+            setImageString('');
 		}
 	}, [isSubmitSuccessful, reset]);
 
