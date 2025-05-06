@@ -32,7 +32,10 @@ export function refreshGiftCards() {
 			const response = await getAllGiftCards();
 			console.log('refresh all gift cards response ---', response);
 			if (response.status === 'success') {
-				dispatch(setGiftCards(response.data));
+				const array = Object.keys(response)
+					.filter((key) => key !== 'status')
+					.map((key) => response[key]);
+				dispatch(setGiftCards(array));
 			}
 		} catch (error) {
 			console.error('Error refreshing gifts Cards:', error);
