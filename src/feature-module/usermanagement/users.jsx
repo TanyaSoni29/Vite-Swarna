@@ -10,7 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Table from '../../core/pagination/datatable';
 import AddUsers from '../../core/modals/usermanagement/addusers';
 import EditUser from '../../core/modals/usermanagement/edituser';
-import { refreshUsers } from '../../core/redux/slices/userSlice';
+import { refreshUsers, setUser } from '../../core/redux/slices/userSlice';
+import DeleteUserModal from '../../core/common/modal/deleteUser';
 
 const Users = () => {
 	const dispatch = useDispatch();
@@ -61,63 +62,65 @@ const Users = () => {
 	const columns = [
 		{
 			title: 'User Name',
-			dataIndex: 'username',
-			render: (text, record) => (
+			dataIndex: 'userName',
+			render: (text) => (
 				<span className='userimgname'>
 					<Link
 						to='#'
 						className='userslist-img bg-img'
 					>
-						<ImageWithBasePath
+						{/* <ImageWithBasePath
 							alt=''
-							src={record.img}
-						/>
+							src={record?.profilePicture}
+						/> */}
 					</Link>
 					<div>
 						<Link to='#'>{text}</Link>
 					</div>
 				</span>
 			),
-			sorter: (a, b) => a.username.length - b.username.length,
+			sorter: (a, b) => a.username.toLocaleCompare(b.username),
 		},
 
 		{
 			title: 'Phone',
-			dataIndex: 'phone',
-			sorter: (a, b) => a.phone.length - b.phone.length,
+			dataIndex: 'phoneNumber',
+			sorter: (a, b) => a.phoneNumber.toLocaleCompare(b.phoneNumber),
+			render: (text) => <span className=''>{text ? text : '-'}</span>,
 		},
 		{
 			title: 'Email',
 			dataIndex: 'email',
-			sorter: (a, b) => a.email.length - b.email.length,
+			render: (text) => <span className=''>{text ? text : '-'}</span>,
+			sorter: (a, b) => a.email.toLocaleCompare(b.email),
 		},
-		{
-			title: 'Role',
-			dataIndex: 'role',
-			sorter: (a, b) => a.role.length - b.role.length,
-		},
-		{
-			title: 'Created On',
-			dataIndex: 'createdon',
-			sorter: (a, b) => a.createdon.length - b.createdon.length,
-		},
+		// {
+		// 	title: 'Role',
+		// 	dataIndex: 'role',
+		// 	sorter: (a, b) => a.role.length - b.role.length,
+		// },
+		// {
+		// 	title: 'Created On',
+		// 	dataIndex: 'createdon',
+		// 	sorter: (a, b) => a.createdon.length - b.createdon.length,
+		// },
 		{
 			title: 'Status',
-			dataIndex: 'status',
+			dataIndex: 'isActive',
 			render: (text) => (
 				<div>
-					{text === 'Active' && (
+					{text && (
 						<span className='d-inline-flex align-items-center p-1 pe-2 rounded-1 text-white bg-success fs-10'>
 							{' '}
 							<i className='ti ti-point-filled me-1 fs-11'></i>
-							{text}
+							Active
 						</span>
 					)}
-					{text === 'Inactive' && (
+					{!text && (
 						<span className='d-inline-flex align-items-center p-1 pe-2 rounded-1 text-white bg-danger fs-10'>
 							{' '}
 							<i className='ti ti-point-filled me-1 fs-11'></i>
-							{text}
+							Inactive
 						</span>
 					)}
 				</div>
@@ -125,13 +128,13 @@ const Users = () => {
 			sorter: (a, b) => a.status.length - b.status.length,
 		},
 		{
-			title: 'Actions',
+			title: '',
 			dataIndex: 'actions',
 			key: 'actions',
-			render: () => (
+			render: (_, user) => (
 				<div className='action-table-data'>
 					<div className='edit-delete-action'>
-						<Link
+						{/* <Link
 							className='me-2 p-2'
 							to='#'
 						>
@@ -139,12 +142,13 @@ const Users = () => {
 								data-feather='eye'
 								className='feather feather-eye action-eye'
 							></i>
-						</Link>
+						</Link> */}
 						<Link
 							className='me-2 p-2'
 							to='#'
 							data-bs-toggle='modal'
 							data-bs-target='#edit-units'
+							onClick={() => dispatch(setUser(user))}
 						>
 							<i
 								data-feather='edit'
@@ -154,6 +158,7 @@ const Users = () => {
 						<Link
 							className='confirm-text p-2'
 							to='#'
+							onClick={() => dispatch(setUser(user))}
 						>
 							<i
 								data-feather='trash-2'
@@ -323,41 +328,7 @@ const Users = () => {
 			</div>
 			<AddUsers />
 			<EditUser />
-			<div
-				className='modal fade'
-				id='delete-modal'
-			>
-				<div className='modal-dialog modal-dialog-centered'>
-					<div className='modal-content'>
-						<div className='page-wrapper-new p-0'>
-							<div className='content p-5 px-3 text-center'>
-								<span className='rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2'>
-									<i className='ti ti-trash fs-24 text-danger' />
-								</span>
-								<h4 className='fs-20 fw-bold mb-2 mt-1'>Delete User</h4>
-								<p className='mb-0 fs-16'>
-									Are you sure you want to delete user?
-								</p>
-								<div className='modal-footer-btn mt-3 d-flex justify-content-center'>
-									<button
-										type='button'
-										className='btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none'
-										data-bs-dismiss='modal'
-									>
-										Cancel
-									</button>
-									<button
-										type='submit'
-										className='btn btn-primary fs-13 fw-medium p-2 px-3'
-									>
-										Yes Delete
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<DeleteUserModal />
 		</div>
 	);
 };
