@@ -1,12 +1,28 @@
 /** @format */
 
 import { DatePicker } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import TextEditor from '../../../feature-module/inventory/texteditor';
+import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import { refreshCoupons } from '../../redux/slices/couponsSlice';
+import { updateCoupons } from '../../redux/services/operations/couponsApi';
+import { useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
 
 const EditCoupons = () => {
+	const dispatch = useDispatch();
+	const { coupon } = useSelector((state) => state.coupon);
+	const {
+		register,
+		handleSubmit,
+		reset,
+		// setValue,
+		// trigger,
+		formState: { errors, isSubmitSuccessful },
+	} = useForm();
 	const price = [
 		{ value: 'choose', label: 'Choose Type' },
 		{ value: 'fixed', label: 'Fixed' },
@@ -18,13 +34,60 @@ const EditCoupons = () => {
 	];
 
 	const [selectedDate, setSelectedDate] = useState(new Date());
+	const [selectedDate1, setSelectedDate1] = useState(new Date());
+
+	const onSubmit = async (data) => {
+		console.log(data);
+		try {
+			const newData = {
+				couponCode: data?.couponCode || '',
+				discountType: data?.discountType?.value || '',
+				discountValue: data?.discountValue || 0,
+				minOrderAmount: data?.minOrderAmount || 0,
+				startDate:
+					new Date(selectedDate).toISOString() || new Date().toISOString(),
+				endDate:
+					new Date(selectedDate1).toISOString() || new Date().toISOString(),
+				usageLimit: data?.usageLimit || 0,
+				timesUsed: data?.timesUsed || 0,
+				isActive: data?.isActive || true,
+			};
+			const response = await updateCoupons(coupon?.id, newData);
+			if (response.status === 'success') {
+				dispatch(refreshCoupons());
+			} else {
+				toast.error('Failed to update Coupons!');
+			}
+		} catch (error) {
+			console.error(error);
+		} finally {
+			reset();
+		}
+	};
+
 	const handleDateChange = (date) => {
 		setSelectedDate(date);
 	};
-	const [selectedDate1, setSelectedDate1] = useState(new Date());
 	const handleDateChange1 = (date) => {
 		setSelectedDate1(date);
 	};
+
+	useEffect(() => {
+		if (isSubmitSuccessful) {
+			reset({
+				couponCode: '',
+				discountType: '',
+				discountValue: 0,
+				minOrderAmount: 0,
+				startDate: new Date().toISOString(),
+				endDate: new Date().toISOString(),
+				usageLimit: 0,
+				timesUsed: 0,
+				isActive: true,
+			});
+		}
+	}, [reset, isSubmitSuccessful]);
+
 	return (
 		<div>
 			{/* Edit coupons */}
@@ -50,7 +113,7 @@ const EditCoupons = () => {
 									</button>
 								</div>
 								<div className='modal-body custom-modal-body'>
-									<form>
+									<form onSubmit={handleSubmit(onSubmit)}>
 										<div className='row'>
 											<div className='col-lg-6'>
 												<div className='input-blocks'>
@@ -60,8 +123,15 @@ const EditCoupons = () => {
 													</label>
 													<input
 														type='text'
-														defaultValue='Coupons 21'
+														{...register('couponName', {
+															required: 'Coupon Name is Required!',
+														})}
 													/>
+													{errors.couponName && (
+														<span className='text-danger'>
+															{errors.couponName.message}
+														</span>
+													)}
 												</div>
 											</div>
 											<div className='col-lg-6'>
@@ -70,10 +140,7 @@ const EditCoupons = () => {
 														Coupon Code
 														<span className='text-danger ms-1'>*</span>
 													</label>
-													<input
-														type='text'
-														defaultValue='Christmas'
-													/>
+													<input type='text' />
 												</div>
 											</div>
 											<div className='col-lg-6'>
@@ -93,10 +160,7 @@ const EditCoupons = () => {
 													<label>
 														Discount<span className='text-danger ms-1'>*</span>
 													</label>
-													<input
-														type='text'
-														defaultValue='$20'
-													/>
+													<input type='text' />
 												</div>
 											</div>
 											<div className='col-lg-12'>
@@ -104,10 +168,7 @@ const EditCoupons = () => {
 													<label>
 														Limit<span className='text-danger ms-1'>*</span>
 													</label>
-													<input
-														type='text'
-														defaultValue='04'
-													/>
+													<input type='text' />
 													<span className='unlimited-text'>
 														0 for Unlimited
 													</span>
@@ -174,11 +235,11 @@ const EditCoupons = () => {
 													isSearchable={true} // Set to false if you don't want a search input
 												/>
 											</div>
-											<div className='mb-3 summer-description-box'>
+											{/* <div className='mb-3 summer-description-box'>
 												<label className='form-label'>Description</label>
 												<TextEditor />
 												<p>Maximum 60 Words</p>
-											</div>
+											</div> */}
 
 											<div className='input-blocks m-0'>
 												<div className='status-toggle modal-status d-flex justify-content-between align-items-center'>
