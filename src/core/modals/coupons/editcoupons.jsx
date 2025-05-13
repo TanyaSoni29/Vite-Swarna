@@ -1,10 +1,10 @@
 /** @format */
 
 import { DatePicker } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
-import TextEditor from '../../../feature-module/inventory/texteditor';
+// import TextEditor from '../../../feature-module/inventory/texteditor';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { refreshCoupons } from '../../redux/slices/couponsSlice';
@@ -19,8 +19,8 @@ const EditCoupons = () => {
 		register,
 		handleSubmit,
 		reset,
-		// setValue,
-		// trigger,
+		setValue,
+		trigger,
 		formState: { errors, isSubmitSuccessful },
 	} = useForm();
 	const price = [
@@ -28,10 +28,10 @@ const EditCoupons = () => {
 		{ value: 'fixed', label: 'Fixed' },
 		{ value: 'percentage', label: 'Percentage' },
 	];
-	const options = [
-		{ value: 'nike-jordan', label: 'Nike Jordan' },
-		{ value: 'amazon-echo-dot', label: 'Amazon Echo Dot' },
-	];
+	// const options = [
+	// 	{ value: 'nike-jordan', label: 'Nike Jordan' },
+	// 	{ value: 'amazon-echo-dot', label: 'Amazon Echo Dot' },
+	// ];
 
 	const [selectedDate, setSelectedDate] = useState(new Date());
 	const [selectedDate1, setSelectedDate1] = useState(new Date());
@@ -116,13 +116,14 @@ const EditCoupons = () => {
 									<form onSubmit={handleSubmit(onSubmit)}>
 										<div className='row'>
 											<div className='col-lg-6'>
-												<div className='input-blocks'>
-													<label>
+												<div className='mb-3'>
+													<label className='form-label'>
 														Coupon Name
 														<span className='text-danger ms-1'>*</span>
 													</label>
 													<input
 														type='text'
+														className='form-control'
 														{...register('couponName', {
 															required: 'Coupon Name is Required!',
 														})}
@@ -135,43 +136,126 @@ const EditCoupons = () => {
 												</div>
 											</div>
 											<div className='col-lg-6'>
-												<div className='input-blocks'>
-													<label>
+												<div className='mb-3'>
+													<label className='form-label'>
 														Coupon Code
 														<span className='text-danger ms-1'>*</span>
 													</label>
-													<input type='text' />
+													<input
+														type='text'
+														className='form-control'
+														{...register('couponCode', {
+															required: 'Coupon Code is Required!',
+														})}
+													/>
+													{errors.couponCode && (
+														<span className='text-danger'>
+															{errors?.couponCode.message}
+														</span>
+													)}
 												</div>
 											</div>
 											<div className='col-lg-6'>
-												<div className='input-blocks'>
-													<label>
+												<div className='mb-3'>
+													<label className='form-label'>
 														Type<span className='text-danger ms-1'>*</span>
 													</label>
 													<Select
 														classNamePrefix='react-select'
 														options={price}
 														placeholder='Choose Type'
+														onChange={(selectedOption) => {
+															setValue('discountType', selectedOption);
+															trigger('discountType'); // optional: triggers validation
+														}}
 													/>
+													{errors.discountType && (
+														<span className='text-danger'>
+															{errors.discountType.message}
+														</span>
+													)}
 												</div>
 											</div>
 											<div className='col-lg-6'>
-												<div className='input-blocks'>
-													<label>
+												<div className='mb-3'>
+													<label className='form-label'>
 														Discount<span className='text-danger ms-1'>*</span>
 													</label>
-													<input type='text' />
+													<input
+														type='number'
+														className='form-control'
+														{...register('discountValue', {
+															required: 'Discount is Required!',
+														})}
+													/>
+													{errors?.discountValue && (
+														<span className='text-danger'>
+															{errors?.discountValue}
+														</span>
+													)}
+												</div>
+											</div>
+											<div className='col-lg-6'>
+												<div className='mb-3'>
+													<label className='form-label'>
+														Minimum Amount
+														<span className='text-danger ms-1'>*</span>
+													</label>
+													<input
+														type='number'
+														className='form-control'
+														{...register('minOrderAmount', {
+															required: 'Minimum Amount is Required!',
+														})}
+													/>
+													{errors.minOrderAmount && (
+														<span className='text-danger'>
+															{errors.minOrderAmount.message}
+														</span>
+													)}
+												</div>
+											</div>
+											<div className='col-lg-6'>
+												<div className='mb-3'>
+													<label className='form-label'>
+														Times Used
+														<span className='text-danger ms-1'>*</span>
+													</label>
+													<input
+														type='number'
+														className='form-control'
+														{...register('timesUsed', {
+															required: 'Times Used is Required!',
+														})}
+													/>
+													{errors.timesUsed && (
+														<span className='text-danger'>
+															{errors.timesUsed.message}
+														</span>
+													)}
 												</div>
 											</div>
 											<div className='col-lg-12'>
-												<div className='input-blocks'>
-													<label>
+												<div className='mb-3'>
+													<label className='form-label'>
+														{' '}
 														Limit<span className='text-danger ms-1'>*</span>
 													</label>
-													<input type='text' />
+													<input
+														type='number'
+														className='form-control'
+														{...register('usageLimit', {
+															required: 'Usage Limit is Required!',
+														})}
+													/>
 													<span className='unlimited-text'>
 														0 for Unlimited
 													</span>
+													{errors.usageLimit && (
+														<span className='text-danger'>
+															{errors.usageLimit.message}
+														</span>
+													)}
 												</div>
 											</div>
 											<div className='col-lg-6'>
@@ -209,7 +293,7 @@ const EditCoupons = () => {
 													</div>
 												</div>
 											</div>
-											<div className='input-blocks'>
+											{/* <div className='input-blocks'>
 												<div className='status-toggle modal-status d-flex justify-content-between align-items-center mb-2'>
 													<span className='status-label'>All Products</span>
 													<div className='d-flex align-items-center'>
@@ -234,7 +318,7 @@ const EditCoupons = () => {
 													placeholder='Select an option'
 													isSearchable={true} // Set to false if you don't want a search input
 												/>
-											</div>
+											</div> */}
 											{/* <div className='mb-3 summer-description-box'>
 												<label className='form-label'>Description</label>
 												<TextEditor />
@@ -243,13 +327,23 @@ const EditCoupons = () => {
 
 											<div className='input-blocks m-0'>
 												<div className='status-toggle modal-status d-flex justify-content-between align-items-center'>
-													<span className='status-label'>Status</span>
+													<span className='status-label'>
+														Status <span className='text-danger ms-1'>*</span>
+													</span>
 													<input
 														type='checkbox'
 														id='user6'
 														className='check'
 														defaultChecked='true'
+														{...register('isActive', {
+															required: 'Status is Required!',
+														})}
 													/>
+													{errors.isActive && (
+														<span className='text-danger'>
+															{errors.isActive.message}
+														</span>
+													)}
 													<label
 														htmlFor='user6'
 														className='checktoggle'
