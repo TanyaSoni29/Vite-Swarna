@@ -343,11 +343,6 @@ const AddCoupons = () => {
 															required: 'Status is Required!',
 														})}
 													/>
-													{errors.isActive && (
-														<span className='text-danger'>
-															{errors.isActive.message}
-														</span>
-													)}
 													<label
 														htmlFor='user3'
 														className='checktoggle'

@@ -35,8 +35,8 @@ const EditCoupons = () => {
 	// 	{ value: 'amazon-echo-dot', label: 'Amazon Echo Dot' },
 	// ];
 
-	const [selectedDate, setSelectedDate] = useState(new Date(coupon?.startDate));
-	const [selectedDate1, setSelectedDate1] = useState(new Date(coupon?.endDate));
+	const [selectedDate, setSelectedDate] = useState(null);
+	const [selectedDate1, setSelectedDate1] = useState(null);
 
 	const onSubmit = async (data) => {
 		console.log(data);
@@ -75,26 +75,28 @@ const EditCoupons = () => {
 	};
 
 	useEffect(() => {
-		const matchedOption = price.find(
-			(option) => option.value === coupon?.discountType
-		);
-		setValue('couponCode', coupon?.couponCode);
-		setValue('couponName', coupon?.couponName);
-		setValue('discountType', matchedOption || null);
-		setValue('discountValue', coupon?.discountValue);
-		setValue('usageLimit', coupon?.usageLimit);
-		setValue('timesUsed', coupon?.timesUsed);
-		setValue('isActive', coupon?.isActive);
-	}, [
-		coupon?.couponCode,
-		coupon?.couponName,
-		coupon?.discountType,
-		coupon?.discountValue,
-		coupon?.usageLimit,
-		coupon?.timesUsed,
-		coupon?.isActive,
-		setValue,
-	]);
+		if (coupon) {
+			const matchedOption = price.find(
+				(option) => option.value === coupon?.discountType
+			);
+			setValue('couponCode', coupon?.couponCode || '');
+			setValue('couponName', coupon?.couponName || '');
+			setValue('discountType', matchedOption || null);
+			setValue('discountValue', coupon?.discountValue || 0);
+			setValue('minOrderAmount', coupon?.minOrderAmount || 0);
+			setValue('usageLimit', coupon?.usageLimit || 0);
+			setValue('timesUsed', coupon?.timesUsed || 0);
+			setValue('isActive', coupon?.isActive ?? true);
+
+			// Safely parse start and end dates
+			if (coupon?.startDate && !isNaN(new Date(coupon.startDate))) {
+				setSelectedDate(new Date(coupon.startDate));
+			}
+			if (coupon?.endDate && !isNaN(new Date(coupon.endDate))) {
+				setSelectedDate1(new Date(coupon.endDate));
+			}
+		}
+	}, [coupon, setValue]);
 
 	useEffect(() => {
 		if (isSubmitSuccessful) {
@@ -103,14 +105,16 @@ const EditCoupons = () => {
 				discountType: '',
 				discountValue: 0,
 				minOrderAmount: 0,
-				startDate: new Date().toISOString(),
-				endDate: new Date().toISOString(),
 				usageLimit: 0,
 				timesUsed: 0,
 				isActive: true,
 			});
+			setSelectedDate(new Date()); // Reset start date to today
+			setSelectedDate1(new Date()); // Reset end date to today
 		}
 	}, [reset, isSubmitSuccessful]);
+
+	console.log({ coupon, selectedDate, selectedDate1 });
 
 	return (
 		<div>
@@ -296,7 +300,8 @@ const EditCoupons = () => {
 															type='date'
 															className='filterdatepicker'
 															dateFormat='dd-MM-yyyy'
-															placeholder='20-2-2024'
+															placeholder='dd-MM-yyyy'
+															
 														/>
 													</div>
 												</div>
@@ -313,7 +318,9 @@ const EditCoupons = () => {
 															type='date'
 															className='filterdatepicker'
 															dateFormat='dd-MM-yyyy'
-															placeholder='20-2-2024'
+															placeholder='dd-MM-yyyy'
+															
+
 														/>
 													</div>
 												</div>
