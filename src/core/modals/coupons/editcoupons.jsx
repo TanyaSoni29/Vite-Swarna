@@ -19,10 +19,12 @@ const EditCoupons = () => {
 		register,
 		handleSubmit,
 		reset,
+		watch,
 		setValue,
 		trigger,
 		formState: { errors, isSubmitSuccessful },
 	} = useForm();
+
 	const price = [
 		{ value: 'choose', label: 'Choose Type' },
 		{ value: 'fixed', label: 'Fixed' },
@@ -33,8 +35,8 @@ const EditCoupons = () => {
 	// 	{ value: 'amazon-echo-dot', label: 'Amazon Echo Dot' },
 	// ];
 
-	const [selectedDate, setSelectedDate] = useState(new Date());
-	const [selectedDate1, setSelectedDate1] = useState(new Date());
+	const [selectedDate, setSelectedDate] = useState(new Date(coupon?.startDate));
+	const [selectedDate1, setSelectedDate1] = useState(new Date(coupon?.endDate));
 
 	const onSubmit = async (data) => {
 		console.log(data);
@@ -71,6 +73,28 @@ const EditCoupons = () => {
 	const handleDateChange1 = (date) => {
 		setSelectedDate1(date);
 	};
+
+	useEffect(() => {
+		const matchedOption = price.find(
+			(option) => option.value === coupon?.discountType
+		);
+		setValue('couponCode', coupon?.couponCode);
+		setValue('couponName', coupon?.couponName);
+		setValue('discountType', matchedOption || null);
+		setValue('discountValue', coupon?.discountValue);
+		setValue('usageLimit', coupon?.usageLimit);
+		setValue('timesUsed', coupon?.timesUsed);
+		setValue('isActive', coupon?.isActive);
+	}, [
+		coupon?.couponCode,
+		coupon?.couponName,
+		coupon?.discountType,
+		coupon?.discountValue,
+		coupon?.usageLimit,
+		coupon?.timesUsed,
+		coupon?.isActive,
+		setValue,
+	]);
 
 	useEffect(() => {
 		if (isSubmitSuccessful) {
@@ -161,6 +185,7 @@ const EditCoupons = () => {
 														Type<span className='text-danger ms-1'>*</span>
 													</label>
 													<Select
+														value={watch('discountType')}
 														classNamePrefix='react-select'
 														options={price}
 														placeholder='Choose Type'
@@ -361,13 +386,13 @@ const EditCoupons = () => {
 											>
 												Cancel
 											</button>
-											<Link
-												to='#'
+											<button
+												type='submit'
 												data-bs-dismiss='modal'
 												className='btn btn-submit'
 											>
 												Save Changes
-											</Link>
+											</button>
 										</div>
 									</form>
 								</div>
