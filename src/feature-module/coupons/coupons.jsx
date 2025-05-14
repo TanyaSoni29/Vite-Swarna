@@ -15,6 +15,7 @@ import {
 	refreshCoupons,
 	setCoupon,
 } from '../../core/redux/slices/couponsSlice';
+import DeleteCoupon from '../../core/common/modal/deleteCoupon';
 
 const Coupons = () => {
 	const dispatch = useDispatch();
@@ -388,6 +389,7 @@ const Coupons = () => {
 			</div>
 			<AddCoupons />
 			<EditCoupons />
+			<DeleteCoupon />
 		</div>
 	);
 };
