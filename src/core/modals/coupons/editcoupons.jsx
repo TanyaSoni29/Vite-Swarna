@@ -1,8 +1,8 @@
 /** @format */
 
 import { DatePicker } from 'antd';
+import { Calendar } from 'feather-icons-react/build/IconComponents';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Select from 'react-select';
 // import TextEditor from '../../../feature-module/inventory/texteditor';
 import { useDispatch } from 'react-redux';
@@ -11,6 +11,7 @@ import { refreshCoupons } from '../../redux/slices/couponsSlice';
 import { updateCoupons } from '../../redux/services/operations/couponsApi';
 import { useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
+import dayjs from 'dayjs';
 
 const EditCoupons = () => {
 	const dispatch = useDispatch();
@@ -90,10 +91,10 @@ const EditCoupons = () => {
 
 			// Safely parse start and end dates
 			if (coupon?.startDate && !isNaN(new Date(coupon.startDate))) {
-				setSelectedDate(new Date(coupon.startDate));
+				setSelectedDate(dayjs(coupon.startDate));
 			}
 			if (coupon?.endDate && !isNaN(new Date(coupon.endDate))) {
-				setSelectedDate1(new Date(coupon.endDate));
+				setSelectedDate1(dayjs(coupon.endDate));
 			}
 		}
 	}, [coupon, setValue]);
@@ -109,8 +110,8 @@ const EditCoupons = () => {
 				timesUsed: 0,
 				isActive: true,
 			});
-			setSelectedDate(new Date()); // Reset start date to today
-			setSelectedDate1(new Date()); // Reset end date to today
+			setSelectedDate(dayjs(new Date())); // Reset start date to today
+			setSelectedDate1(dayjs(new Date())); // Reset end date to today
 		}
 	}, [reset, isSubmitSuccessful]);
 
@@ -294,14 +295,14 @@ const EditCoupons = () => {
 														<span className='text-danger ms-1'>*</span>
 													</label>
 													<div className='input-groupicon calender-input'>
+														<Calendar className='info-img' />
 														<DatePicker
-															selected={selectedDate}
+															value={selectedDate}
 															onChange={handleDateChange}
-															type='date'
 															className='filterdatepicker'
-															dateFormat='dd-MM-yyyy'
-															placeholder='dd-MM-yyyy'
-															
+															format='DD-MM-YYYY'
+															placeholder='DD-MM-YYYY'
+															allowClear={false}
 														/>
 													</div>
 												</div>
@@ -312,15 +313,14 @@ const EditCoupons = () => {
 														End Date<span className='text-danger ms-1'>*</span>
 													</label>
 													<div className='input-groupicon calender-input'>
+														<Calendar className='info-img' />
 														<DatePicker
-															selected={selectedDate1}
+															value={selectedDate1}
 															onChange={handleDateChange1}
-															type='date'
 															className='filterdatepicker'
-															dateFormat='dd-MM-yyyy'
-															placeholder='dd-MM-yyyy'
-															
-
+															format='DD-MM-YYYY'
+															placeholder='DD-MM-YYYY'
+															allowClear={false}
 														/>
 													</div>
 												</div>

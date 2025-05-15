@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { createCoupons } from '../../redux/services/operations/couponsApi';
 import { refreshCoupons } from '../../redux/slices/couponsSlice';
 import toast from 'react-hot-toast';
+// import dayjs from 'dayjs';
 
 const AddCoupons = () => {
 	const dispatch = useDispatch();
@@ -22,8 +23,8 @@ const AddCoupons = () => {
 		trigger,
 		formState: { errors, isSubmitSuccessful },
 	} = useForm();
-	const [selectedDate, setSelectedDate] = useState(new Date());
-	const [selectedDate1, setSelectedDate1] = useState(new Date());
+	const [selectedDate, setSelectedDate] = useState(null);
+	const [selectedDate1, setSelectedDate1] = useState(null);
 
 	// const list = [
 	//   { value: "choose", label: "Choose" },
@@ -81,8 +82,8 @@ const AddCoupons = () => {
 				discountType: '',
 				discountValue: 0,
 				minOrderAmount: 0,
-				startDate: new Date().toISOString(),
-				endDate: new Date().toISOString(),
+				startDate: null,
+				endDate: null,
 				usageLimit: 0,
 				timesUsed: 0,
 				isActive: true,
@@ -270,12 +271,12 @@ const AddCoupons = () => {
 													<div className='input-groupicon calender-input'>
 														<Calendar className='info-img' />
 														<DatePicker
-															selected={selectedDate}
+															value={selectedDate}
 															onChange={handleDateChange}
-															type='date'
 															className='filterdatepicker'
-															dateFormat='dd-MM-yyyy'
-															placeholder='20-2-2024'
+															format='DD-MM-YYYY'
+															placeholder='DD-MM-YYYY'
+															allowClear={false}
 														/>
 													</div>
 												</div>
@@ -288,12 +289,12 @@ const AddCoupons = () => {
 													<div className='input-groupicon calender-input'>
 														<Calendar className='info-img' />
 														<DatePicker
-															selected={selectedDate1}
+															value={selectedDate1}
 															onChange={handleDateChange1}
-															type='date'
 															className='filterdatepicker'
-															dateFormat='dd-MM-yyyy'
-															placeholder='20-2-2024'
+															format='DD-MM-YYYY'
+															placeholder='DD-MM-YYYY'
+															allowClear={false}
 														/>
 													</div>
 												</div>

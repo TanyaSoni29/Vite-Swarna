@@ -10,7 +10,6 @@ const DeleteCoupon = () => {
 	const dispatch = useDispatch();
 	const { coupon } = useSelector((state) => state.coupon);
 
-	console.log(coupon);
 	const handleDeleteSubmit = async () => {
 		try {
 			const response = await deleteCoupons(coupon?.couponID);
